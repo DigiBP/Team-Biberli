@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1rnq0jw" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <decision id="Decision_13abbjd" name="Decision Pre-selection">
+    <informationRequirement id="InformationRequirement_0uyilc1">
+      <requiredDecision href="#Decision_1upsfmk" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0aic4uf">
+      <input id="Input_1" label="Experience" biodi:width="192" camunda:inputVariable="working_experience">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>experience</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1a66z3o">
+          <text>"Junior","Professional","Senior"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0j1qeub" label="Highest Diploma">
+        <inputExpression id="LiteralExpression_1exe12l" typeRef="string">
+          <text>highest_diploma</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0bpgl5k">
+          <text>"High School","EFZ","BM","Bachelor","Master","Doctor"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_031mazr" label="Avarage Grading of the last Education">
+        <inputExpression id="LiteralExpression_0vbw5ln" typeRef="double">
+          <text>avarage_grading</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Decision Pre-selection" name="decision_preselection" typeRef="string">
+        <outputValues id="UnaryTests_1kllwng">
+          <text>"Cancellation","Accepted"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_0c67fjp">
+        <description>Not enough education</description>
+        <inputEntry id="UnaryTests_0okdp7b">
+          <text>"Junior"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xgety7">
+          <text>"High School","EFZ","BM"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06zx14c">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15ygz12">
+          <text>"Cancellation"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0uyo96h">
+        <description>Bad grades</description>
+        <inputEntry id="UnaryTests_1twvpbr">
+          <text>"Junior"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r9pxtv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gcgw6a">
+          <text>=&gt;4.7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_008g4lu">
+          <text>"Cancellation"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_152p7de">
+        <description>Accepted</description>
+        <inputEntry id="UnaryTests_0dmzz2q">
+          <text>"Junior"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y1agtr">
+          <text>"Bachelor","Master"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01kaov1">
+          <text>4.8&lt;=</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17fn3s0">
+          <text>"Accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0lgkwal">
+        <description>Overqualified</description>
+        <inputEntry id="UnaryTests_0j0znwb">
+          <text>"Junior"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e5qdx6">
+          <text>"Doctor"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r2wif0">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ssxk8d">
+          <text>"Cancellation"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1obqn52">
+        <description>Accepted</description>
+        <inputEntry id="UnaryTests_0snb2qd">
+          <text>"Professional"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xxaihc">
+          <text>"High School","EFZ","BM"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n8tlvi">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0vijdxd">
+          <text>"Cancellation"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17d922w">
+        <description>Accepted</description>
+        <inputEntry id="UnaryTests_13cmsnt">
+          <text>"Professional"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nmlyh1">
+          <text>"Bachelor","Master"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bp6v73">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0r8cblh">
+          <text>"Accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0v6iwsq">
+        <description>Overqualified</description>
+        <inputEntry id="UnaryTests_0oikkd9">
+          <text>"Professional"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18x7mk2">
+          <text>"Doctor"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rb6c8d">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05ws4f1">
+          <text>"Cancellation"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ljyep7">
+        <description>Accepted</description>
+        <inputEntry id="UnaryTests_0p5ge49">
+          <text>"Senior"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_062dt8y">
+          <text>"Bachelor","Master"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wt33zd">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ax4wim">
+          <text>"Accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12kaxqr">
+        <description>Overqualified</description>
+        <inputEntry id="UnaryTests_1dvp233">
+          <text>"Senior"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15vaqcb">
+          <text>"Doctor"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kt5rkf">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dpfiv5">
+          <text>"Cancellation"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_1upsfmk" name="Decision Working Experience">
+    <decisionTable id="DecisionTable_1qkusn1">
+      <input id="InputClause_07q42nd" label="Working Years">
+        <inputExpression id="LiteralExpression_0rm3uar" typeRef="integer">
+          <text>working_years</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0l2kz5w" label="Working Experience" name="working_experience" typeRef="string" />
+      <rule id="DecisionRule_1infea9">
+        <inputEntry id="UnaryTests_1atsile">
+          <text>[1,2,3]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13frw2x">
+          <text>Junior</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kqu50b">
+        <inputEntry id="UnaryTests_1fokm5v">
+          <text>[4.5.6.7.8.9]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0tfh6ca">
+          <text>Professional</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0vu4p5k">
+        <inputEntry id="UnaryTests_1oo6n7y">
+          <text>10&lt;</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1sv7ii7">
+          <text>Senior</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0m8w9sz">
+        <inputEntry id="UnaryTests_11g0qbp">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0j37bin">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_13abbjd">
+        <dc:Bounds height="80" width="180" x="290" y="160" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0ir1r0k" dmnElementRef="InformationRequirement_0uyilc1">
+        <di:waypoint x="380" y="310" />
+        <di:waypoint x="380" y="260" />
+        <di:waypoint x="380" y="240" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1tx6cc9" dmnElementRef="Decision_1upsfmk">
+        <dc:Bounds height="80" width="180" x="290" y="310" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
