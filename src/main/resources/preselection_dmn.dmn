@@ -7,7 +7,7 @@
     <decisionTable id="DecisionTable_0aic4uf">
       <input id="Input_1" label="Experience" biodi:width="192" camunda:inputVariable="working_experience">
         <inputExpression id="InputExpression_1" typeRef="string">
-          <text>experience</text>
+          <text>working_experience</text>
         </inputExpression>
         <inputValues id="UnaryTests_1a66z3o">
           <text>"Junior","Professional","Senior"</text>
@@ -239,7 +239,7 @@
       </rule>
       <rule id="DecisionRule_0vu4p5k">
         <inputEntry id="UnaryTests_1oo6n7y">
-          <text>[10..100]</text>
+          <text>&gt;=10</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1sv7ii7">
           <text>"Senior"</text>
