@@ -58,7 +58,7 @@
           <text>&lt;4.7</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0zzqdqd">
-          <text>"3"</text>
+          <text>"2"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0uyo96h">
@@ -73,7 +73,7 @@
           <text>&gt;=4.7</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_008g4lu">
-          <text>"2"</text>
+          <text>"3"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_152p7de">
