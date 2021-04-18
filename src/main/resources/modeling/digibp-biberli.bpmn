@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:collaboration id="Collaboration_1w9gfpp">
-    <bpmn:participant id="Participant_0uzz21c" processRef="Process_0zkva06" />
+    <bpmn:participant id="Participant_1" name="Recruting Service" processRef="Process_recruting-service" />
     <bpmn:participant id="Participant_1ol61bo" name="Candidate" processRef="Process_1gezfp8" />
     <bpmn:messageFlow id="Flow_0cw4vuy" name="Rejections" sourceRef="Activity_1bdft1e" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_1l3be19" name="Feedback/ Rejection" sourceRef="Participant_1ol61bo" targetRef="Activity_1tv5wtj" />
@@ -10,23 +10,22 @@
     <bpmn:messageFlow id="Flow_0w59w74" name="Job confirmation" sourceRef="Activity_083fizo" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_0a8vehc" name="Contract" sourceRef="Activity_1y9jus5" targetRef="Participant_1ol61bo" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0zkva06" name="recruting-process" isExecutable="true" camunda:versionTag="1.0">
+  <bpmn:process id="Process_recruting-service" name="recruting-process" isExecutable="true" camunda:versionTag="1.0">
     <bpmn:laneSet id="LaneSet_0i9bvyr">
       <bpmn:lane id="Lane_0qfd7ic" name="Recruiter">
         <bpmn:flowNodeRef>Activity_1obtlnm</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_03hlmec</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1bdft1e</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1tv5wtj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1y9jus5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_13n8aez</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0efgehs" name="Teamleader">
-        <bpmn:flowNodeRef>Event_0x6uw6m</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0jhksn2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0os5z6l</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_083fizo</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1vr2w86</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>describe_job_request</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0x6uw6m</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1mn9mf9" name="HR Business Partner">
         <bpmn:flowNodeRef>Gateway_067yf7u</bpmn:flowNodeRef>
@@ -35,59 +34,8 @@
         <bpmn:flowNodeRef>approve_job_request</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="Event_0x6uw6m" name="New employe needed">
-      <bpmn:outgoing>Flow_0vyg4vf</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:endEvent id="Event_0jhksn2" name="New employe is hired">
-      <bpmn:incoming>Flow_0kpu3sv</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:exclusiveGateway id="Gateway_067yf7u" name="Approved?">
-      <bpmn:incoming>Flow_12xuxcn</bpmn:incoming>
-      <bpmn:outgoing>Flow_0pkros9</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1vocks0</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_1yxn06e" name="New job is rejected">
-      <bpmn:incoming>Flow_0pkros9</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:manualTask id="Activity_0os5z6l" name="On-boarding">
-      <bpmn:incoming>Flow_0bd29fh</bpmn:incoming>
-      <bpmn:outgoing>Flow_0kpu3sv</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:manualTask id="Activity_1obtlnm" name="Advertising job">
-      <bpmn:incoming>Flow_1vocks0</bpmn:incoming>
-      <bpmn:outgoing>Flow_0v3x767</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:intermediateThrowEvent id="Event_03hlmec" name="Enough qualitative applications">
-      <bpmn:incoming>Flow_0sro9p8</bpmn:incoming>
-      <bpmn:outgoing>Flow_1g3z68l</bpmn:outgoing>
-    </bpmn:intermediateThrowEvent>
-    <bpmn:manualTask id="Activity_1bdft1e" name="Pre-selection of the canditates">
-      <bpmn:incoming>Flow_1g3z68l</bpmn:incoming>
-      <bpmn:outgoing>Flow_0a68m67</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:manualTask id="Activity_1tv5wtj" name="Interview process">
-      <bpmn:incoming>Flow_0mx9i09</bpmn:incoming>
-      <bpmn:outgoing>Flow_1bj2mrv</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:manualTask id="Activity_083fizo" name="Candidate evaluation and selection">
-      <bpmn:incoming>Flow_1bj2mrv</bpmn:incoming>
-      <bpmn:outgoing>Flow_0wkegpk</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:manualTask id="Activity_1y9jus5" name="Contract negotiation">
-      <bpmn:incoming>Flow_0wkegpk</bpmn:incoming>
-      <bpmn:outgoing>Flow_0y1zktp</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:manualTask id="Activity_0ylv1k4" name="Contract signing">
-      <bpmn:incoming>Flow_0y1zktp</bpmn:incoming>
-      <bpmn:outgoing>Flow_0bd29fh</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:manualTask id="Activity_1vr2w86" name="Selection of the canditates">
-      <bpmn:incoming>Flow_0a68m67</bpmn:incoming>
-      <bpmn:outgoing>Flow_0mx9i09</bpmn:outgoing>
-    </bpmn:manualTask>
     <bpmn:sequenceFlow id="Flow_0kpu3sv" sourceRef="Activity_0os5z6l" targetRef="Event_0jhksn2" />
-    <bpmn:sequenceFlow id="Flow_0sro9p8" sourceRef="Activity_13n8aez" targetRef="Event_03hlmec" />
-    <bpmn:sequenceFlow id="Flow_1g3z68l" sourceRef="Event_03hlmec" targetRef="Activity_1bdft1e" />
+    <bpmn:sequenceFlow id="Flow_0sro9p8" sourceRef="Activity_13n8aez" targetRef="Activity_1bdft1e" />
     <bpmn:sequenceFlow id="Flow_0a68m67" sourceRef="Activity_1bdft1e" targetRef="Activity_1vr2w86" />
     <bpmn:sequenceFlow id="Flow_1bj2mrv" sourceRef="Activity_1tv5wtj" targetRef="Activity_083fizo" />
     <bpmn:sequenceFlow id="Flow_0wkegpk" sourceRef="Activity_083fizo" targetRef="Activity_1y9jus5" />
@@ -98,13 +46,50 @@
     <bpmn:sequenceFlow id="Flow_0vyg4vf" sourceRef="Event_0x6uw6m" targetRef="describe_job_request" />
     <bpmn:sequenceFlow id="Flow_003a6g2" sourceRef="describe_job_request" targetRef="approve_job_request" />
     <bpmn:sequenceFlow id="Flow_12xuxcn" sourceRef="approve_job_request" targetRef="Gateway_067yf7u" />
-    <bpmn:sequenceFlow id="Flow_0pkros9" name="rejected" sourceRef="Gateway_067yf7u" targetRef="Event_1yxn06e" />
-    <bpmn:sequenceFlow id="Flow_1vocks0" name="approved" sourceRef="Gateway_067yf7u" targetRef="Activity_1obtlnm" />
-    <bpmn:callActivity id="Activity_13n8aez" name="Receive job applications" calledElement="Collaboration_0emvdc0">
-      <bpmn:incoming>Flow_0v3x767</bpmn:incoming>
-      <bpmn:outgoing>Flow_0sro9p8</bpmn:outgoing>
-    </bpmn:callActivity>
-    <bpmn:userTask id="describe_job_request" name="Describe job request" camunda:formKey="job_request">
+    <bpmn:sequenceFlow id="Flow_0pkros9" name="rejected" sourceRef="Gateway_067yf7u" targetRef="Event_1yxn06e">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "false"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1vocks0" name="approved" sourceRef="Gateway_067yf7u" targetRef="Activity_1obtlnm">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "true"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="approve_job_request" name="Approve job request">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="jobtitle" label="Job Titel" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="tasks" label="Tasks to execute" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="experience" label="Experience Level" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+            <camunda:value id="Value_junior" name="Junior" />
+            <camunda:value id="Value_professional" name="Professional" />
+            <camunda:value id="Value_senior" name="Senior" />
+          </camunda:formField>
+          <camunda:formField id="salary" label="Salary" type="long">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="supervisor" label="Supervisor" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="approvement" label="Approve Request?" type="boolean" defaultValue="true" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_003a6g2</bpmn:incoming>
+      <bpmn:outgoing>Flow_12xuxcn</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="describe_job_request" name="Describe job request">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobtitle" label="Job Titel" type="string" />
@@ -121,15 +106,62 @@
       <bpmn:incoming>Flow_0vyg4vf</bpmn:incoming>
       <bpmn:outgoing>Flow_003a6g2</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="approve_job_request" name="Approve job request">
-      <bpmn:incoming>Flow_003a6g2</bpmn:incoming>
-      <bpmn:outgoing>Flow_12xuxcn</bpmn:outgoing>
-    </bpmn:userTask>
+    <bpmn:manualTask id="Activity_1vr2w86" name="Selection of the canditates">
+      <bpmn:incoming>Flow_0a68m67</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mx9i09</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_0ylv1k4" name="Contract signing">
+      <bpmn:incoming>Flow_0y1zktp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bd29fh</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_1y9jus5" name="Contract negotiation">
+      <bpmn:incoming>Flow_0wkegpk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0y1zktp</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_083fizo" name="Candidate evaluation and selection">
+      <bpmn:incoming>Flow_1bj2mrv</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wkegpk</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_1tv5wtj" name="Interview process">
+      <bpmn:incoming>Flow_0mx9i09</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bj2mrv</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_1bdft1e" name="Pre-selection of the canditates">
+      <bpmn:incoming>Flow_0sro9p8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0a68m67</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_1obtlnm" name="Advertising job">
+      <bpmn:incoming>Flow_1vocks0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v3x767</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_0os5z6l" name="On-boarding">
+      <bpmn:incoming>Flow_0bd29fh</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kpu3sv</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:endEvent id="Event_1yxn06e" name="New job is rejected">
+      <bpmn:incoming>Flow_0pkros9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_067yf7u" name="Approved?">
+      <bpmn:incoming>Flow_12xuxcn</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pkros9</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1vocks0</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_0jhksn2" name="New employe is hired">
+      <bpmn:incoming>Flow_0kpu3sv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="Event_0x6uw6m" name="New employe needed" camunda:initiator="Teamleader">
+      <bpmn:outgoing>Flow_0vyg4vf</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:manualTask id="Activity_13n8aez" name="Receive job applications">
+      <bpmn:incoming>Flow_0v3x767</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sro9p8</bpmn:outgoing>
+    </bpmn:manualTask>
   </bpmn:process>
   <bpmn:process id="Process_1gezfp8" isExecutable="false" />
+  <bpmn:message id="Message_0xe7ef0" name="Message_3vv5320" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1w9gfpp">
-      <bpmndi:BPMNShape id="Participant_0uzz21c_di" bpmnElement="Participant_0uzz21c" isHorizontal="true">
+      <bpmndi:BPMNShape id="Participant_0uzz21c_di" bpmnElement="Participant_1" isHorizontal="true">
         <dc:Bounds x="155" y="80" width="2395" height="444" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1mn9mf9_di" bpmnElement="Lane_1mn9mf9" isHorizontal="true">
@@ -160,16 +192,16 @@
         <di:waypoint x="555" y="464" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_003a6g2_di" bpmnElement="Flow_003a6g2">
-        <di:waypoint x="440" y="204" />
+        <di:waypoint x="440" y="206" />
         <di:waypoint x="440" y="424" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0vyg4vf_di" bpmnElement="Flow_0vyg4vf">
-        <di:waypoint x="318" y="164" />
-        <di:waypoint x="390" y="164" />
+        <di:waypoint x="308" y="166" />
+        <di:waypoint x="390" y="166" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0v3x767_di" bpmnElement="Flow_0v3x767">
         <di:waypoint x="630" y="314" />
-        <di:waypoint x="850" y="314" />
+        <di:waypoint x="780" y="314" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0mx9i09_di" bpmnElement="Flow_0mx9i09">
         <di:waypoint x="1420" y="214" />
@@ -203,24 +235,14 @@
         <di:waypoint x="1270" y="174" />
         <di:waypoint x="1370" y="174" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1g3z68l_di" bpmnElement="Flow_1g3z68l">
-        <di:waypoint x="1128" y="314" />
-        <di:waypoint x="1220" y="314" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0sro9p8_di" bpmnElement="Flow_0sro9p8">
-        <di:waypoint x="950" y="314" />
-        <di:waypoint x="1092" y="314" />
+        <di:waypoint x="880" y="314" />
+        <di:waypoint x="1220" y="314" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0kpu3sv_di" bpmnElement="Flow_0kpu3sv">
         <di:waypoint x="2360" y="164" />
         <di:waypoint x="2472" y="164" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0x6uw6m_di" bpmnElement="Event_0x6uw6m">
-        <dc:Bounds x="282" y="146" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="267" y="189" width="67" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0jhksn2_di" bpmnElement="Event_0jhksn2">
         <dc:Bounds x="2472" y="146" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -245,12 +267,6 @@
       <bpmndi:BPMNShape id="Activity_1obtlnm_di" bpmnElement="Activity_1obtlnm">
         <dc:Bounds x="530" y="274" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_03hlmec_di" bpmnElement="Event_03hlmec">
-        <dc:Bounds x="1092" y="296" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1080" y="250" width="59" height="40" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1bdft1e_di" bpmnElement="Activity_1bdft1e">
         <dc:Bounds x="1220" y="274" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -270,13 +286,19 @@
         <dc:Bounds x="1370" y="134" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1v4nudu_di" bpmnElement="describe_job_request">
-        <dc:Bounds x="390" y="124" width="100" height="80" />
+        <dc:Bounds x="390" y="126" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0qqyzk3_di" bpmnElement="approve_job_request">
         <dc:Bounds x="390" y="424" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0a9yi9x_di" bpmnElement="Activity_13n8aez">
-        <dc:Bounds x="850" y="274" width="100" height="80" />
+      <bpmndi:BPMNShape id="Event_1r5lhhb_di" bpmnElement="Event_0x6uw6m">
+        <dc:Bounds x="272" y="148" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="257" y="191" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0uekruw_di" bpmnElement="Activity_13n8aez">
+        <dc:Bounds x="780" y="274" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1ol61bo_di" bpmnElement="Participant_1ol61bo" isHorizontal="true">
         <dc:Bounds x="155" y="654" width="2395" height="60" />
