@@ -32,7 +32,7 @@
         <bpmn:flowNodeRef>Gateway_067yf7u</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1yxn06e</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0ylv1k4</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>approve_job_request</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_04s5iyy</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="Event_0x6uw6m" name="New employe needed">
@@ -96,15 +96,19 @@
     <bpmn:sequenceFlow id="Flow_0mx9i09" sourceRef="Activity_1vr2w86" targetRef="Activity_1tv5wtj" />
     <bpmn:sequenceFlow id="Flow_0v3x767" sourceRef="Activity_1obtlnm" targetRef="Activity_13n8aez" />
     <bpmn:sequenceFlow id="Flow_0vyg4vf" sourceRef="Event_0x6uw6m" targetRef="describe_job_request" />
-    <bpmn:sequenceFlow id="Flow_003a6g2" sourceRef="describe_job_request" targetRef="approve_job_request" />
-    <bpmn:sequenceFlow id="Flow_12xuxcn" sourceRef="approve_job_request" targetRef="Gateway_067yf7u" />
+    <bpmn:sequenceFlow id="Flow_003a6g2" sourceRef="describe_job_request" targetRef="Activity_04s5iyy" />
+    <bpmn:sequenceFlow id="Flow_12xuxcn" sourceRef="Activity_04s5iyy" targetRef="Gateway_067yf7u" />
     <bpmn:sequenceFlow id="Flow_0pkros9" name="rejected" sourceRef="Gateway_067yf7u" targetRef="Event_1yxn06e" />
     <bpmn:sequenceFlow id="Flow_1vocks0" name="approved" sourceRef="Gateway_067yf7u" targetRef="Activity_1obtlnm" />
+    <bpmn:subProcess id="Activity_04s5iyy" name="Approval process new job">
+      <bpmn:incoming>Flow_003a6g2</bpmn:incoming>
+      <bpmn:outgoing>Flow_12xuxcn</bpmn:outgoing>
+    </bpmn:subProcess>
     <bpmn:callActivity id="Activity_13n8aez" name="Receive job applications" calledElement="Collaboration_0emvdc0">
       <bpmn:incoming>Flow_0v3x767</bpmn:incoming>
       <bpmn:outgoing>Flow_0sro9p8</bpmn:outgoing>
     </bpmn:callActivity>
-    <bpmn:userTask id="describe_job_request" name="Describe job request" camunda:formKey="job_request">
+    <bpmn:userTask id="describe_job_request" name="Describe job request">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobtitle" label="Job Titel" type="string" />
@@ -120,10 +124,6 @@
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0vyg4vf</bpmn:incoming>
       <bpmn:outgoing>Flow_003a6g2</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="approve_job_request" name="Approve job request">
-      <bpmn:incoming>Flow_003a6g2</bpmn:incoming>
-      <bpmn:outgoing>Flow_12xuxcn</bpmn:outgoing>
     </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="Process_1gezfp8" isExecutable="false" />
@@ -272,7 +272,7 @@
       <bpmndi:BPMNShape id="Activity_1v4nudu_di" bpmnElement="describe_job_request">
         <dc:Bounds x="390" y="124" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0qqyzk3_di" bpmnElement="approve_job_request">
+      <bpmndi:BPMNShape id="Activity_0a29g6n_di" bpmnElement="Activity_04s5iyy">
         <dc:Bounds x="390" y="424" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0a9yi9x_di" bpmnElement="Activity_13n8aez">

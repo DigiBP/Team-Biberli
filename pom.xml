@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.fhnw.digibp</groupId>
-    <artifactId>digibp-camunda-template</artifactId>
+    <artifactId>team-biberli</artifactId>
     <version>7.14.0</version>
     <packaging>jar</packaging>
 
