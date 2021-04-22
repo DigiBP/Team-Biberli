@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0buflcl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0buflcl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
   <bpmn:collaboration id="Collaboration_0mdnlsk">
     <bpmn:participant id="Participant_10uh3m8" name="Test" processRef="Process_1cfjfj0" />
   </bpmn:collaboration>
@@ -11,14 +11,6 @@
       <bpmn:incoming>Flow_18a5zk9</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:manualTask id="Activity_16545h7" name="test">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="Test">
-            <camunda:script scriptFormat="JavaScript" />
-          </camunda:inputParameter>
-        </camunda:inputOutput>
-        <camunda:executionListener class="" event="start" />
-      </bpmn:extensionElements>
       <bpmn:incoming>Flow_09s3kor</bpmn:incoming>
       <bpmn:outgoing>Flow_0wph90g</bpmn:outgoing>
     </bpmn:manualTask>
