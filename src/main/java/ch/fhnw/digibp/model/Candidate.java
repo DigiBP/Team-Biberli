@@ -1,25 +1,30 @@
 package ch.fhnw.digibp.model;
 
 public class Candidate {
-    private long id;
+    private String surname;
     private String name;
+    private String mobileNumber;
     private String jobDescriptionId;
+    private int workingYears;
+    private String highestDiploma;
+    private double averageGrade;
 
-    public Candidate() {
-    }
-
-    public Candidate(long id, String name, String jobDescriptionId) {
-        this.id = id;
+    public Candidate(String surname, String name, String mobileNumber, String jobDescriptionId, int workingYears, String highestDiploma, double averageGrade) {
+        this.surname = surname;
         this.name = name;
+        this.mobileNumber = mobileNumber;
         this.jobDescriptionId = jobDescriptionId;
+        this.workingYears = workingYears;
+        this.highestDiploma = highestDiploma;
+        this.averageGrade = averageGrade;
     }
 
-    public long getId() {
-        return id;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getName() {
@@ -30,6 +35,14 @@ public class Candidate {
         this.name = name;
     }
 
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
     public String getJobDescriptionId() {
         return jobDescriptionId;
     }
@@ -38,12 +51,27 @@ public class Candidate {
         this.jobDescriptionId = jobDescriptionId;
     }
 
-    @Override
-    public String toString() {
-        return "Candidate{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", jobDescriptionId=" + jobDescriptionId +
-                '}';
+    public int getWorkingYears() {
+        return workingYears;
+    }
+
+    public void setWorkingYears(int workingYears) {
+        this.workingYears = workingYears;
+    }
+
+    public String getHighestDiploma() {
+        return highestDiploma;
+    }
+
+    public void setHighestDiploma(String highestDiploma) {
+        this.highestDiploma = highestDiploma;
+    }
+
+    public double getAverageGrade() {
+        return averageGrade;
+    }
+
+    public void setAverageGrade(double averageGrade) {
+        this.averageGrade = averageGrade;
     }
 }
