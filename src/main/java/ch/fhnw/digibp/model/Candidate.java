@@ -1,15 +1,17 @@
 package ch.fhnw.digibp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Candidate {
     private String surname;
     private String name;
     private String mobileNumber;
     private String jobDescriptionId;
-    private int workingYears;
+    private String workingYears;
     private String highestDiploma;
-    private double averageGrade;
+    private String averageGrade;
 
-    public Candidate(String surname, String name, String mobileNumber, String jobDescriptionId, int workingYears, String highestDiploma, double averageGrade) {
+    public Candidate(String surname, String name, String mobileNumber, String jobDescriptionId, String workingYears, String highestDiploma, String averageGrade) {
         this.surname = surname;
         this.name = name;
         this.mobileNumber = mobileNumber;
@@ -19,6 +21,7 @@ public class Candidate {
         this.averageGrade = averageGrade;
     }
 
+    @JsonProperty("1")
     public String getSurname() {
         return surname;
     }
@@ -27,6 +30,7 @@ public class Candidate {
         this.surname = surname;
     }
 
+    @JsonProperty("6")
     public String getName() {
         return name;
     }
@@ -35,6 +39,7 @@ public class Candidate {
         this.name = name;
     }
 
+    @JsonProperty("7")
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -43,6 +48,7 @@ public class Candidate {
         this.mobileNumber = mobileNumber;
     }
 
+    @JsonProperty("2")
     public String getJobDescriptionId() {
         return jobDescriptionId;
     }
@@ -51,14 +57,16 @@ public class Candidate {
         this.jobDescriptionId = jobDescriptionId;
     }
 
-    public int getWorkingYears() {
+    @JsonProperty("3")
+    public String getWorkingYears() {
         return workingYears;
     }
 
-    public void setWorkingYears(int workingYears) {
+    public void setWorkingYears(String workingYears) {
         this.workingYears = workingYears;
     }
 
+    @JsonProperty("4")
     public String getHighestDiploma() {
         return highestDiploma;
     }
@@ -67,11 +75,12 @@ public class Candidate {
         this.highestDiploma = highestDiploma;
     }
 
-    public double getAverageGrade() {
+    @JsonProperty("5")
+    public String getAverageGrade() {
         return averageGrade;
     }
 
-    public void setAverageGrade(double averageGrade) {
+    public void setAverageGrade(String averageGrade) {
         this.averageGrade = averageGrade;
     }
 }
