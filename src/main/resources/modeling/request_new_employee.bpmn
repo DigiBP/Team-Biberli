@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:collaboration id="Collaboration_1w9gfpp">
-    <bpmn:participant id="Participant_1" name="request new employee" processRef="publish-new-job-offer" />
+    <bpmn:participant id="Participant_1" name="XYZ Inc." processRef="request-new-employee" />
   </bpmn:collaboration>
-  <bpmn:process id="publish-new-job-offer" name="publish-new-job-offer" isExecutable="true" camunda:versionTag="1.2">
+  <bpmn:process id="request-new-employee" name="request-new-employee" isExecutable="true" camunda:versionTag="1.3">
     <bpmn:laneSet id="LaneSet_0i9bvyr">
       <bpmn:lane id="Lane_0efgehs" name="Teamleader">
         <bpmn:flowNodeRef>Event_0x6uw6m</bpmn:flowNodeRef>
