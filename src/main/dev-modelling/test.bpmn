@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0buflcl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0buflcl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:collaboration id="Collaboration_0mdnlsk">
-    <bpmn:participant id="Participant_10uh3m8" name="Test" processRef="Process_1cfjfj0" />
+    <bpmn:participant id="Participant_10uh3m8" name="Test" processRef="Test" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1cfjfj0" isExecutable="true">
+  <bpmn:process id="Test" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="ready">
       <bpmn:outgoing>Flow_09s3kor</bpmn:outgoing>
     </bpmn:startEvent>
