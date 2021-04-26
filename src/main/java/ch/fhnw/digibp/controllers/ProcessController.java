@@ -45,4 +45,5 @@ public class ProcessController implements JavaDelegate{
 
         candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(delegateExecution.getVariable("jobOfferIds"))).forEach(candidate -> restTemplate.postForObject("https://digibp-biberli.herokuapp.com/engine-rest/process-definition/key/Process_1cfjfj0/start", request, String.class));
     }
+    //TO-DO implement exception handling
 }
