@@ -11,7 +11,7 @@ EXPOSE $PORT
 # Run the image as a non-root user
 RUN adduser -D myuser
 USER myuser
-# Run the app.  CMD is required to run on Heroku
+# Run the app. CMD is required to run on Heroku
 ARG JAVA_OPTS=-Xmx300m
 ENV JAVA_OPTS $JAVA_OPTS
 # $PORT is set by Heroku
