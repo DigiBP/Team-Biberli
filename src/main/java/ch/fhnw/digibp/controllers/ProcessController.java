@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -17,9 +18,8 @@ import java.util.List;
 @RequestMapping("/process")
 public class ProcessController {
 
-    @GetMapping
-    public String startProcessForCandidates() {
-        //TODO here comes an Array with candidates, foreach canditate start a new process
+    @GetMapping("/{processId}")
+    public String startProcessForCandidates(@PathVariable String processId ) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<String>("", headers);
@@ -27,7 +27,7 @@ public class ProcessController {
 
         List<Candidate> candidates = restTemplate.exchange("https://hook.integromat.com/2yni7gbntflnphfxn5af8uu1k6qyoaqq", HttpMethod.GET, request, new ParameterizedTypeReference<List<Candidate>>(){}).getBody();
 
-        candidates.forEach(candidate -> restTemplate.postForObject("https://digibp-biberli.herokuapp.com/engine-rest/process-definition/key/Process_1cfjfj0/start", request, String.class));
+        candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(processId)).forEach(candidate -> restTemplate.postForObject("https://digibp-biberli.herokuapp.com/engine-rest/process-definition/key/Process_1cfjfj0/start", request, String.class));
 
         return "done";
     }
