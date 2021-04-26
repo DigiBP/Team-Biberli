@@ -37,7 +37,6 @@ public class Helper {
 //                .tenantIdIn("showcase")
                 .handler((ExternalTask externalTask, ExternalTaskService externalTaskService) -> {
                     try {
-
                         List<String> jobOfferIds = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/2yni7gbntflnphfxn5af8uu1k6qyoaqq", HttpMethod.GET, request, new ParameterizedTypeReference<List<Candidate>>() {
                         }).getBody()).stream().map(Candidate::getJobDescriptionId).distinct().collect(Collectors.toList());
 

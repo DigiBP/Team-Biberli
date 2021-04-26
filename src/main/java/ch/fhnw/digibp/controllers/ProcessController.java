@@ -1,6 +1,8 @@
 package ch.fhnw.digibp.controllers;
 
 import ch.fhnw.digibp.model.Candidate;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/process")
-public class ProcessController {
+public class ProcessController implements JavaDelegate{
 
     @GetMapping("/{processId}")
     public String startProcessForCandidates(@PathVariable String processId ) {
@@ -32,4 +34,15 @@ public class ProcessController {
         return "done";
     }
 
+    @Override
+    public void execute(DelegateExecution delegateExecution) throws Exception {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<String>("", headers);
+        RestTemplate restTemplate = new RestTemplate();
+
+        List<Candidate> candidates = restTemplate.exchange("https://hook.integromat.com/2yni7gbntflnphfxn5af8uu1k6qyoaqq", HttpMethod.GET, request, new ParameterizedTypeReference<List<Candidate>>(){}).getBody();
+
+        candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(delegateExecution.getVariable("jobOfferIds"))).forEach(candidate -> restTemplate.postForObject("https://digibp-biberli.herokuapp.com/engine-rest/process-definition/key/Process_1cfjfj0/start", request, String.class));
+    }
 }
