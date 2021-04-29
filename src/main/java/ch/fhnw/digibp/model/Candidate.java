@@ -11,6 +11,9 @@ public class Candidate {
     private String highestDiploma;
     private String averageGrade;
 
+    public Candidate() {
+    }
+
     public Candidate(String surname, String name, String mobileNumber, String jobDescriptionId, String workingYears, String highestDiploma, String averageGrade) {
         this.surname = surname;
         this.name = name;

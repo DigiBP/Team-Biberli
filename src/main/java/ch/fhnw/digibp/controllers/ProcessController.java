@@ -43,6 +43,6 @@ public class ProcessController implements JavaDelegate{
 
         List<Candidate> candidates = restTemplate.exchange("https://hook.integromat.com/2yni7gbntflnphfxn5af8uu1k6qyoaqq", HttpMethod.GET, request, new ParameterizedTypeReference<List<Candidate>>(){}).getBody();
 
-        candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(delegateExecution.getVariable("jobOfferIds"))).forEach(candidate -> restTemplate.postForObject("https://digibp-biberli.herokuapp.com/engine-rest/process-definition/key/Process_1cfjfj0/start", request, String.class));
+        candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(delegateExecution.getVariable("selectedJob"))).forEach(candidate -> restTemplate.postForObject("https://digibp-biberli.herokuapp.com/engine-rest/process-definition/key/Process_1cfjfj0/start", request, String.class));
     }
 }
