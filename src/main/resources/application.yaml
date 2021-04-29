@@ -27,3 +27,6 @@ spring:
 #server:
 #  port: 8081
 #Test
+
+camunda-rest:
+  url: ${CAMUNDA_REST_URL:http://localhost:8080/engine-rest}
