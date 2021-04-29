@@ -9,15 +9,17 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @RequestMapping("/process")
+@Component
 public class ProcessController implements JavaDelegate{
 
-    @Value("${camunda-rest.url}")
+    @Value("${camunda.rest.url}")
     private String camundaRestUrl;
 
     @Override

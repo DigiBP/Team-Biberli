@@ -1,4 +1,6 @@
 camunda:
+  rest:
+    url: "http://localhost:8080/engine-rest"
   bpm:
     admin-user:
       id: demo
@@ -28,5 +30,6 @@ spring:
 #  port: 8081
 #Test
 
-camunda-rest:
-  url: ${CAMUNDA_REST_URL:http://localhost:8080/engine-rest}
+spring:
+  config:
+    import: "optional:configtree:/etc/config/"
