@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0buflcl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
-  <bpmn:collaboration id="Collaboration_0mdnlsk">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0buflcl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="test">
     <bpmn:participant id="Participant_10uh3m8" name="Test" processRef="Test" />
   </bpmn:collaboration>
   <bpmn:process id="Test" isExecutable="true">
@@ -23,7 +23,7 @@
     </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mdnlsk">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="test">
       <bpmndi:BPMNShape id="Participant_10uh3m8_di" bpmnElement="Participant_10uh3m8" isHorizontal="true">
         <dc:Bounds x="129" y="79" width="600" height="141" />
       </bpmndi:BPMNShape>

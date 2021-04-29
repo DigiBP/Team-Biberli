@@ -12,3 +12,6 @@ camunda:
 cors:
   enabled: ${CORS_ENABLED:false}
   allowed-origin: ${CORS_ORIGIN:*}
+
+camunda-rest:
+  url: ${CAMUNDA_REST_URL:https://digibp-biberli.herokuapp.com/engine-rest}
