@@ -5,8 +5,6 @@ spring:
     password: ${JDBC_DATABASE_PASSWORD}
 
 camunda:
-  rest:
-    url: "https://digibp-biberli.herokuapp.com/engine-rest"
   bpm:
     admin-user:
       password: ${CAMUNDA_ADMIN_PASSWORD:demo}
