@@ -31,6 +31,7 @@ public class ProcessController implements JavaDelegate{
 
         List<Candidate> candidates = restTemplate.exchange("https://hook.integromat.com/2yni7gbntflnphfxn5af8uu1k6qyoaqq", HttpMethod.GET, request, new ParameterizedTypeReference<List<Candidate>>(){}).getBody();
 
+        //TODO change "test" im Link zu spezifischer process definition
         candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(delegateExecution.getVariable("selectedJob"))).forEach(candidate -> restTemplate.postForObject(camundaRestUrl+"/process-definition/key/test/start", request, String.class));
     }
 }
