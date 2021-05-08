@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
   <bpmn:collaboration id="Collaboration_1w9gfpp">
     <bpmn:participant id="Participant_1" name="XYZ Inc." processRef="requesting-phase" />
   </bpmn:collaboration>
@@ -15,13 +15,11 @@
         <bpmn:flowNodeRef>Activity_1obtlnm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0jhksn2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>approve_job_request</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1hk1tgx</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="Flow_0vyg4vf" sourceRef="Event_0x6uw6m" targetRef="describe_job_request" />
     <bpmn:sequenceFlow id="Flow_12xuxcn" sourceRef="approve_job_request" targetRef="Gateway_067yf7u" />
-    <bpmn:sequenceFlow id="Flow_1vocks0" name="approved" sourceRef="Gateway_067yf7u" targetRef="Activity_1obtlnm">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "true"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1o0keaj" name="rejected" sourceRef="Gateway_067yf7u" targetRef="Activity_1pubcny">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "false"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -30,15 +28,15 @@
     <bpmn:sequenceFlow id="Flow_08j4j66" sourceRef="Activity_1pubcny" targetRef="approve_job_request" />
     <bpmn:exclusiveGateway id="Gateway_067yf7u" name="Approved?">
       <bpmn:incoming>Flow_12xuxcn</bpmn:incoming>
-      <bpmn:outgoing>Flow_1vocks0</bpmn:outgoing>
       <bpmn:outgoing>Flow_1o0keaj</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1vocks0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:serviceTask id="Activity_1obtlnm" name="Publish job offer">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify([{    "jobtitle" : jobtitle,
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify([{    "jobId" : jobId, "jobtitle" : jobtitle,
 "tasks" : tasks,
 "experience" : experience,
 "salary" : salary,
@@ -55,8 +53,11 @@
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="jobId" />
+        </camunda:inputOutput>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1vocks0</bpmn:incoming>
+      <bpmn:incoming>Flow_0d580g8</bpmn:incoming>
       <bpmn:outgoing>Flow_1mm058x</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="Event_0jhksn2" name="New job position published">
@@ -140,6 +141,14 @@
       <bpmn:incoming>Flow_08j4j66</bpmn:incoming>
       <bpmn:outgoing>Flow_12xuxcn</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1vocks0" name="approved" sourceRef="Gateway_067yf7u" targetRef="Activity_1hk1tgx">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "true"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_1hk1tgx" name="Create Id" camunda:class="ch.fhnw.digibp.app.IdentificationGenerator">
+      <bpmn:incoming>Flow_1vocks0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0d580g8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0d580g8" sourceRef="Activity_1hk1tgx" targetRef="Activity_1obtlnm" />
   </bpmn:process>
   <bpmn:message id="Message_0xe7ef0" name="Message_3vv5320" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -177,9 +186,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1vocks0_di" bpmnElement="Flow_1vocks0">
         <di:waypoint x="655" y="393" />
-        <di:waypoint x="750" y="393" />
+        <di:waypoint x="680" y="393" />
+        <di:waypoint x="680" y="330" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="667" y="373" width="46" height="14" />
+          <dc:Bounds x="704" y="378" width="46" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12xuxcn_di" bpmnElement="Flow_12xuxcn">
@@ -189,6 +199,11 @@
       <bpmndi:BPMNEdge id="Flow_0vyg4vf_di" bpmnElement="Flow_0vyg4vf">
         <di:waypoint x="308" y="169" />
         <di:waypoint x="390" y="169" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d580g8_di" bpmnElement="Flow_0d580g8">
+        <di:waypoint x="720" y="330" />
+        <di:waypoint x="720" y="363" />
+        <di:waypoint x="750" y="363" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Gateway_067yf7u_di" bpmnElement="Gateway_067yf7u" isMarkerVisible="true">
         <dc:Bounds x="605" y="368" width="50" height="50" />
@@ -219,6 +234,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0qqyzk3_di" bpmnElement="approve_job_request">
         <dc:Bounds x="390" y="353" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1g4mrxu_di" bpmnElement="Activity_1hk1tgx">
+        <dc:Bounds x="660" y="250" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

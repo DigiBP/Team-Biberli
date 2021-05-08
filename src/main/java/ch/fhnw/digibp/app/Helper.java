@@ -31,9 +31,11 @@ public class Helper implements JavaDelegate {
         delegateExecution.setVariable("availableJobsToStart", jobOfferIds.toString());
 
         //TODO set options for enum jobOfferIds
-//        Map<String, String> values = new LinkedHashMap<String, String>();
+//        Map<String, String> values = new LinkedHashMap<>();
 //        jobOfferIds.forEach(s -> values.put(s, s));
 //        EnumFormType formType = new EnumFormType(values);
 //        delegateExecution.setVariable("jobOfferIds", formType);
+//        System.out.println(delegateExecution.getVariable("jobOfferIds"));
+//        System.out.println(delegateExecution.getVariable("jobOfferIds").getClass().getName());
     }
 }
