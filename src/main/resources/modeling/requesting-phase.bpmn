@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:collaboration id="Collaboration_1w9gfpp">
     <bpmn:participant id="Participant_1" name="XYZ Inc." processRef="requesting-phase" />
   </bpmn:collaboration>
-  <bpmn:process id="requesting-phase" name="requesting-phase" isExecutable="true" camunda:versionTag="1.6">
+  <bpmn:process id="requesting-phase" name="requesting-phase" isExecutable="true" camunda:versionTag="1.7">
     <bpmn:laneSet id="LaneSet_0i9bvyr">
       <bpmn:lane id="Lane_0efgehs" name="Teamleader">
         <bpmn:flowNodeRef>describe_job_request</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0x6uw6m</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1pubcny</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>correct_job_request</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1mn9mf9" name="HR Business Partner">
         <bpmn:flowNodeRef>Gateway_067yf7u</bpmn:flowNodeRef>
@@ -20,12 +20,12 @@
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="Flow_0vyg4vf" sourceRef="Event_0x6uw6m" targetRef="describe_job_request" />
     <bpmn:sequenceFlow id="Flow_12xuxcn" sourceRef="approve_job_request" targetRef="Gateway_067yf7u" />
-    <bpmn:sequenceFlow id="Flow_1o0keaj" name="rejected" sourceRef="Gateway_067yf7u" targetRef="Activity_1pubcny">
+    <bpmn:sequenceFlow id="Flow_1o0keaj" name="rejected" sourceRef="Gateway_067yf7u" targetRef="correct_job_request">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "false"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1mm058x" sourceRef="Activity_1obtlnm" targetRef="Event_0jhksn2" />
     <bpmn:sequenceFlow id="Flow_1snor9m" sourceRef="describe_job_request" targetRef="approve_job_request" />
-    <bpmn:sequenceFlow id="Flow_08j4j66" sourceRef="Activity_1pubcny" targetRef="approve_job_request" />
+    <bpmn:sequenceFlow id="Flow_08j4j66" sourceRef="correct_job_request" targetRef="approve_job_request" />
     <bpmn:exclusiveGateway id="Gateway_067yf7u" name="Approved?">
       <bpmn:incoming>Flow_12xuxcn</bpmn:incoming>
       <bpmn:outgoing>Flow_1o0keaj</bpmn:outgoing>
@@ -36,11 +36,14 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify([{    "jobId" : jobId, "jobtitle" : jobtitle,
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify([{    
+"jobId" : jobId, 
+"jobtitle" : jobtitle,
 "tasks" : tasks,
 "experience" : experience,
 "salary" : salary,
-"supervisor" : supervisor
+"supervisor" : supervisor,
+"skillgrading" : skillgrading
 }]);</camunda:script>
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/nkrtoj1gf4shwqiepbq9n5vv4khwtv4i</camunda:inputParameter>
@@ -83,7 +86,7 @@
     <bpmn:startEvent id="Event_0x6uw6m" name="New employee needed">
       <bpmn:outgoing>Flow_0vyg4vf</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1pubcny" name="Correct request">
+    <bpmn:userTask id="correct_job_request" name="Correct Request">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobtitle" label="Job Titel" type="string" />
@@ -99,6 +102,23 @@
             <camunda:validation>
               <camunda:constraint name="readonly" />
             </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="skillgrading" label="Grade" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+            <camunda:value id="Grade_1" name="Grade_1" />
+            <camunda:value id="Grade_2" name="Grade_2" />
+            <camunda:value id="Grade_3" name="Grade_3" />
+            <camunda:value id="Grade_4" name="Grade_4" />
+            <camunda:value id="Grade_5" name="Grade_5" />
+            <camunda:value id="Grade_6" name="Grade_6" />
+            <camunda:value id="Grade_7" name="Grade_7" />
+            <camunda:value id="Grade_8" name="Grade_8" />
+            <camunda:value id="Grade_9" name="Grade_9" />
+            <camunda:value id="Grade_10" name="Grade_10" />
+            <camunda:value id="Grade_11" name="Grade_11" />
+            <camunda:value id="Grade_12" name="Grade_12" />
           </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
@@ -135,6 +155,20 @@
           </camunda:formField>
           <camunda:formField id="approvement" label="Approve Request?" type="boolean" defaultValue="true" />
           <camunda:formField id="comments" label="Comments" type="string" />
+          <camunda:formField id="skillgrading" label="Grade" type="enum">
+            <camunda:value id="Grade_1" name="Grade_1" />
+            <camunda:value id="Grade_2" name="Grade_2" />
+            <camunda:value id="Grade_3" name="Grade_3" />
+            <camunda:value id="Grade_4" name="Grade_4" />
+            <camunda:value id="Grade_5" name="Grade_5" />
+            <camunda:value id="Grade_6" name="Grade_6" />
+            <camunda:value id="Grade_7" name="Grade_7" />
+            <camunda:value id="Grade_8" name="Grade_8" />
+            <camunda:value id="Grade_9" name="Grade_9" />
+            <camunda:value id="Grade_10" name="Grade_10" />
+            <camunda:value id="Grade_11" name="Grade_11" />
+            <camunda:value id="Grade_12" name="Grade_12" />
+          </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1snor9m</bpmn:incoming>
@@ -162,6 +196,19 @@
       <bpmndi:BPMNShape id="Lane_0efgehs_di" bpmnElement="Lane_0efgehs" isHorizontal="true">
         <dc:Bounds x="185" y="100" width="785" height="140" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0d580g8_di" bpmnElement="Flow_0d580g8">
+        <di:waypoint x="720" y="330" />
+        <di:waypoint x="720" y="363" />
+        <di:waypoint x="750" y="363" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vocks0_di" bpmnElement="Flow_1vocks0">
+        <di:waypoint x="655" y="393" />
+        <di:waypoint x="680" y="393" />
+        <di:waypoint x="680" y="330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="704" y="378" width="46" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_08j4j66_di" bpmnElement="Flow_08j4j66">
         <di:waypoint x="580" y="169" />
         <di:waypoint x="535" y="169" />
@@ -184,14 +231,6 @@
           <dc:Bounds x="580" y="340" width="40" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1vocks0_di" bpmnElement="Flow_1vocks0">
-        <di:waypoint x="655" y="393" />
-        <di:waypoint x="680" y="393" />
-        <di:waypoint x="680" y="330" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="704" y="378" width="46" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12xuxcn_di" bpmnElement="Flow_12xuxcn">
         <di:waypoint x="490" y="393" />
         <di:waypoint x="605" y="393" />
@@ -199,11 +238,6 @@
       <bpmndi:BPMNEdge id="Flow_0vyg4vf_di" bpmnElement="Flow_0vyg4vf">
         <di:waypoint x="308" y="169" />
         <di:waypoint x="390" y="169" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0d580g8_di" bpmnElement="Flow_0d580g8">
-        <di:waypoint x="720" y="330" />
-        <di:waypoint x="720" y="363" />
-        <di:waypoint x="750" y="363" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Gateway_067yf7u_di" bpmnElement="Gateway_067yf7u" isMarkerVisible="true">
         <dc:Bounds x="605" y="368" width="50" height="50" />
@@ -229,7 +263,7 @@
           <dc:Bounds x="254" y="194" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1pubcny_di" bpmnElement="Activity_1pubcny">
+      <bpmndi:BPMNShape id="Activity_1pubcny_di" bpmnElement="correct_job_request">
         <dc:Bounds x="580" y="129" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0qqyzk3_di" bpmnElement="approve_job_request">
