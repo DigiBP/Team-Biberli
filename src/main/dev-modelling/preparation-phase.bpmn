@@ -10,7 +10,9 @@
     <bpmn:userTask id="Activity_1jbb2ju" name="select job Offer">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="jobOfferIds" label="Job Offers" type="enum" />
+          <camunda:formField id="jobOfferIds" label="tbd Select available ids" type="enum" />
+          <camunda:formField id="availableJobsToStart" label="Here you can see the available Job ids to start" type="string" />
+          <camunda:formField id="selectedJob" label="Select a job id" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_056lg1d</bpmn:incoming>
@@ -21,14 +23,14 @@
     <bpmn:serviceTask id="Activity_0jv4nr1" name="start Process of job offer" camunda:class="ch.fhnw.digibp.controllers.ProcessController">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="joboffers">${joboffers}</camunda:inputParameter>
+          <camunda:inputParameter name="selectedJob">${selectedJob}</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0vamvgv</bpmn:incoming>
       <bpmn:outgoing>Flow_0nvowyt</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0x4ogpc" sourceRef="StartEvent_1" targetRef="Activity_0vcb9ea" />
-    <bpmn:serviceTask id="Activity_0vcb9ea" name="GetJobOffers" camunda:type="external" camunda:topic="GetJobOffers">
+    <bpmn:serviceTask id="Activity_0vcb9ea" name="GetJobOffers" camunda:class="ch.fhnw.digibp.app.Helper">
       <bpmn:incoming>Flow_0x4ogpc</bpmn:incoming>
       <bpmn:outgoing>Flow_056lg1d</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -36,21 +38,21 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="preparation-phase">
-      <bpmndi:BPMNEdge id="Flow_0vamvgv_di" bpmnElement="Flow_0vamvgv">
-        <di:waypoint x="670" y="117" />
-        <di:waypoint x="790" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0nvowyt_di" bpmnElement="Flow_0nvowyt">
-        <di:waypoint x="890" y="117" />
-        <di:waypoint x="1082" y="117" />
+      <bpmndi:BPMNEdge id="Flow_056lg1d_di" bpmnElement="Flow_056lg1d">
+        <di:waypoint x="440" y="117" />
+        <di:waypoint x="570" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0x4ogpc_di" bpmnElement="Flow_0x4ogpc">
         <di:waypoint x="215" y="117" />
         <di:waypoint x="340" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_056lg1d_di" bpmnElement="Flow_056lg1d">
-        <di:waypoint x="440" y="117" />
-        <di:waypoint x="570" y="117" />
+      <bpmndi:BPMNEdge id="Flow_0nvowyt_di" bpmnElement="Flow_0nvowyt">
+        <di:waypoint x="890" y="117" />
+        <di:waypoint x="1082" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vamvgv_di" bpmnElement="Flow_0vamvgv">
+        <di:waypoint x="670" y="117" />
+        <di:waypoint x="790" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
@@ -58,14 +60,14 @@
       <bpmndi:BPMNShape id="Event_0uuxa7q_di" bpmnElement="Event_0uuxa7q">
         <dc:Bounds x="1082" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jd98xv_di" bpmnElement="Activity_1jbb2ju">
+        <dc:Bounds x="570" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0wq1oat_di" bpmnElement="Activity_0jv4nr1">
         <dc:Bounds x="790" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0w4b5c5_di" bpmnElement="Activity_0vcb9ea">
         <dc:Bounds x="340" y="77" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0jd98xv_di" bpmnElement="Activity_1jbb2ju">
-        <dc:Bounds x="570" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

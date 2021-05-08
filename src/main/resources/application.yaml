@@ -11,6 +11,8 @@ camunda:
 spring:
   profiles:
     active: local
+  config:
+    import: "optional:configtree:/etc/config/"
 #  jersey:
 #    application-path: /rest
 #  datasource:
@@ -27,3 +29,4 @@ spring:
 #server:
 #  port: 8081
 #Test
+
