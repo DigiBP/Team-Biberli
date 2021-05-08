@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bsqfz9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bsqfz9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <bpmn:collaboration id="Collaboration_1yuujpz">
+    <bpmn:participant id="Participant_1vgktf9" name="XYZ Inc." processRef="preparation-phase" />
+  </bpmn:collaboration>
   <bpmn:process id="preparation-phase" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_12mm41t">
+      <bpmn:lane id="Lane_1e38l2r" name="Recruiter">
+        <bpmn:flowNodeRef>Activity_0vcb9ea</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1jbb2ju</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0jv4nr1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0uuxa7q</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:serviceTask id="Activity_0vcb9ea" name="GetJobOffers" camunda:class="ch.fhnw.digibp.app.Helper">
+      <bpmn:incoming>Flow_0x4ogpc</bpmn:incoming>
+      <bpmn:outgoing>Flow_056lg1d</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_056lg1d" sourceRef="Activity_0vcb9ea" targetRef="Activity_1jbb2ju" />
+    <bpmn:sequenceFlow id="Flow_0x4ogpc" sourceRef="StartEvent_1" targetRef="Activity_0vcb9ea" />
+    <bpmn:sequenceFlow id="Flow_0nvowyt" sourceRef="Activity_0jv4nr1" targetRef="Event_0uuxa7q" />
+    <bpmn:sequenceFlow id="Flow_0vamvgv" sourceRef="Activity_1jbb2ju" targetRef="Activity_0jv4nr1" />
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0x4ogpc</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:endEvent id="Event_0uuxa7q">
-      <bpmn:incoming>Flow_0nvowyt</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:userTask id="Activity_1jbb2ju" name="select job Offer">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -18,8 +35,6 @@
       <bpmn:incoming>Flow_056lg1d</bpmn:incoming>
       <bpmn:outgoing>Flow_0vamvgv</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0vamvgv" sourceRef="Activity_1jbb2ju" targetRef="Activity_0jv4nr1" />
-    <bpmn:sequenceFlow id="Flow_0nvowyt" sourceRef="Activity_0jv4nr1" targetRef="Event_0uuxa7q" />
     <bpmn:serviceTask id="Activity_0jv4nr1" name="start Process of job offer" camunda:class="ch.fhnw.digibp.controllers.ProcessController">
       <bpmn:extensionElements>
         <camunda:inputOutput>
@@ -29,45 +44,48 @@
       <bpmn:incoming>Flow_0vamvgv</bpmn:incoming>
       <bpmn:outgoing>Flow_0nvowyt</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_0x4ogpc" sourceRef="StartEvent_1" targetRef="Activity_0vcb9ea" />
-    <bpmn:serviceTask id="Activity_0vcb9ea" name="GetJobOffers" camunda:class="ch.fhnw.digibp.app.Helper">
-      <bpmn:incoming>Flow_0x4ogpc</bpmn:incoming>
-      <bpmn:outgoing>Flow_056lg1d</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_056lg1d" sourceRef="Activity_0vcb9ea" targetRef="Activity_1jbb2ju" />
+    <bpmn:endEvent id="Event_0uuxa7q">
+      <bpmn:incoming>Flow_0nvowyt</bpmn:incoming>
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="preparation-phase">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1yuujpz">
+      <bpmndi:BPMNShape id="Participant_1vgktf9_di" bpmnElement="Participant_1vgktf9" isHorizontal="true">
+        <dc:Bounds x="180" y="50" width="670" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1e38l2r_di" bpmnElement="Lane_1e38l2r" isHorizontal="true">
+        <dc:Bounds x="210" y="50" width="640" height="130" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_056lg1d_di" bpmnElement="Flow_056lg1d">
-        <di:waypoint x="440" y="117" />
-        <di:waypoint x="570" y="117" />
+        <di:waypoint x="451" y="117" />
+        <di:waypoint x="500" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0x4ogpc_di" bpmnElement="Flow_0x4ogpc">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="340" y="117" />
+        <di:waypoint x="288" y="117" />
+        <di:waypoint x="351" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0nvowyt_di" bpmnElement="Flow_0nvowyt">
-        <di:waypoint x="890" y="117" />
-        <di:waypoint x="1082" y="117" />
+        <di:waypoint x="740" y="117" />
+        <di:waypoint x="782" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0vamvgv_di" bpmnElement="Flow_0vamvgv">
-        <di:waypoint x="670" y="117" />
-        <di:waypoint x="790" y="117" />
+        <di:waypoint x="600" y="117" />
+        <di:waypoint x="640" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="99" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_0w4b5c5_di" bpmnElement="Activity_0vcb9ea">
+        <dc:Bounds x="351" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0uuxa7q_di" bpmnElement="Event_0uuxa7q">
-        <dc:Bounds x="1082" y="99" width="36" height="36" />
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="252" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0jd98xv_di" bpmnElement="Activity_1jbb2ju">
-        <dc:Bounds x="570" y="77" width="100" height="80" />
+        <dc:Bounds x="500" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0wq1oat_di" bpmnElement="Activity_0jv4nr1">
-        <dc:Bounds x="790" y="77" width="100" height="80" />
+        <dc:Bounds x="640" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0w4b5c5_di" bpmnElement="Activity_0vcb9ea">
-        <dc:Bounds x="340" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="Event_0uuxa7q_di" bpmnElement="Event_0uuxa7q">
+        <dc:Bounds x="782" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

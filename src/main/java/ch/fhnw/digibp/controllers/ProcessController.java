@@ -34,4 +34,5 @@ public class ProcessController implements JavaDelegate{
         //TODO change "test" im Link zu spezifischer process definition
         candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(delegateExecution.getVariable("selectedJob"))).forEach(candidate -> restTemplate.postForObject(camundaRestUrl+"/process-definition/key/test/start", request, String.class));
     }
+    //TO-DO implement exception handling
 }
