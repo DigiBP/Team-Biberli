@@ -5,6 +5,13 @@
   </bpmn:collaboration>
   <bpmn:process id="Process_0a5q47h" isExecutable="true">
     <bpmn:serviceTask id="Activity_15jbxt8" name="send mail">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="Input_34ntg43" />
+          </camunda:inputOutput>
+        </camunda:connector>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ry9j80</bpmn:incoming>
       <bpmn:outgoing>Flow_1vip20h</bpmn:outgoing>
     </bpmn:serviceTask>
