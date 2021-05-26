@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
+import spinjar.com.minidev.json.JSONObject;
 
 import java.util.List;
 
@@ -31,8 +32,25 @@ public class ProcessController implements JavaDelegate{
 
         List<Candidate> candidates = restTemplate.exchange("https://hook.integromat.com/2yni7gbntflnphfxn5af8uu1k6qyoaqq", HttpMethod.GET, request, new ParameterizedTypeReference<List<Candidate>>(){}).getBody();
 
+        HttpEntity<String> secondRequest = new HttpEntity<String>("", headers);
+
         //TODO change "test" im Link zu spezifischer process definition
-        candidates.stream().filter(candidate -> candidate.getJobDescriptionId().equals(delegateExecution.getVariable("selectedJob"))).forEach(candidate -> restTemplate.postForObject(camundaRestUrl+"/process-definition/key/selection-phase/start", request, String.class));
+        for (Candidate candidate : candidates) {
+            if (candidate.getJobDescriptionId().equals(delegateExecution.getVariable("selectedJob"))) {
+                JSONObject json = new JSONObject();
+//                json.put()
+//                restTemplate.postForObject(camundaRestUrl + "/process-definition/key/selection-phase/start", new HttpEntity<>(
+//                        "{
+//                        'variables': {
+//                    'jobId' : {
+//                        'value' :' +candidate.getJobDescriptionId()+',
+//                                'type': 'String'
+//                    }
+//                }
+//            }, headers"" +
+//                ), String.class);
+            }
+        }
     }
     //TO-DO implement exception handling
 }
