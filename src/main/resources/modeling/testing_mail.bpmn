@@ -3,31 +3,31 @@
   <bpmn:collaboration id="Collaboration_0j9zf7l">
     <bpmn:participant id="Participant_18jlx3t" name="test-sending" processRef="test-sending" />
   </bpmn:collaboration>
-  <bpmn:process id="test-sending" isExecutable="true" camunda:versionTag="v2.0">
-    <bpmn:serviceTask id="Activity_15jbxt8" name="send mail" camunda:class="ch.fhnw.digibp.app.MailingHelper">
-      <bpmn:incoming>Flow_0ry9j80</bpmn:incoming>
-      <bpmn:outgoing>Flow_1vip20h</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_1ayi7gg" name="input data">
+  <bpmn:process id="test-sending" name="test-sending" isExecutable="true" camunda:versionTag="1.3">
+    <bpmn:sequenceFlow id="Flow_1vip20h" sourceRef="Activity_15jbxt8" targetRef="Event_0d1l6cu" />
+    <bpmn:sequenceFlow id="Flow_0rn89sm" sourceRef="StartEvent_1" targetRef="inputdata" />
+    <bpmn:sequenceFlow id="Flow_0ry9j80" sourceRef="inputdata" targetRef="Activity_15jbxt8" />
+    <bpmn:userTask id="inputdata" name="Input Data">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="recipient" label="Recipient" type="string" />
-          <camunda:formField id="text" label="text" type="string" />
-          <camunda:formField id="subject" label="subject" type="string" />
+          <camunda:formField id="text" label="Text" type="string" />
+          <camunda:formField id="subject" label="Subject" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0rn89sm</bpmn:incoming>
       <bpmn:outgoing>Flow_0ry9j80</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:endEvent id="Event_0d1l6cu" name="mail sent">
-      <bpmn:incoming>Flow_1vip20h</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:startEvent id="StartEvent_1" name="start sending task">
       <bpmn:outgoing>Flow_0rn89sm</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1vip20h" sourceRef="Activity_15jbxt8" targetRef="Event_0d1l6cu" />
-    <bpmn:sequenceFlow id="Flow_0rn89sm" sourceRef="StartEvent_1" targetRef="Activity_1ayi7gg" />
-    <bpmn:sequenceFlow id="Flow_0ry9j80" sourceRef="Activity_1ayi7gg" targetRef="Activity_15jbxt8" />
+    <bpmn:serviceTask id="Activity_15jbxt8" name="send mail" camunda:class="ch.fhnw.digibp.app.MailingHelper">
+      <bpmn:incoming>Flow_0ry9j80</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vip20h</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0d1l6cu" name="mail sent">
+      <bpmn:incoming>Flow_1vip20h</bpmn:incoming>
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0j9zf7l">
@@ -35,33 +35,33 @@
         <dc:Bounds x="129" y="80" width="531" height="190" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0ry9j80_di" bpmnElement="Flow_0ry9j80">
-        <di:waypoint x="380" y="170" />
-        <di:waypoint x="430" y="170" />
+        <di:waypoint x="380" y="169" />
+        <di:waypoint x="430" y="169" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0rn89sm_di" bpmnElement="Flow_0rn89sm">
-        <di:waypoint x="238" y="170" />
-        <di:waypoint x="280" y="170" />
+        <di:waypoint x="238" y="169" />
+        <di:waypoint x="280" y="169" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1vip20h_di" bpmnElement="Flow_1vip20h">
-        <di:waypoint x="530" y="170" />
-        <di:waypoint x="572" y="170" />
+        <di:waypoint x="530" y="169" />
+        <di:waypoint x="572" y="169" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_0tnop7m_di" bpmnElement="Activity_15jbxt8">
-        <dc:Bounds x="430" y="130" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0gu4zlr_di" bpmnElement="Activity_1ayi7gg">
-        <dc:Bounds x="280" y="130" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0d1l6cu_di" bpmnElement="Event_0d1l6cu">
-        <dc:Bounds x="572" y="152" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="568" y="195" width="45" height="14" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Activity_0gu4zlr_di" bpmnElement="inputdata">
+        <dc:Bounds x="280" y="129" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="202" y="152" width="36" height="36" />
+        <dc:Bounds x="202" y="151" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="177" y="195" width="87" height="14" />
+          <dc:Bounds x="177" y="194" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0tnop7m_di" bpmnElement="Activity_15jbxt8">
+        <dc:Bounds x="430" y="129" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0d1l6cu_di" bpmnElement="Event_0d1l6cu">
+        <dc:Bounds x="572" y="151" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="568" y="194" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

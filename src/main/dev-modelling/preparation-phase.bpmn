@@ -3,7 +3,7 @@
   <bpmn:collaboration id="Collaboration_1yuujpz">
     <bpmn:participant id="Participant_1vgktf9" name="XYZ Inc." processRef="preparation-phase" />
   </bpmn:collaboration>
-  <bpmn:process id="preparation-phase" isExecutable="true">
+  <bpmn:process id="preparation-phase" name="preparation-phase" isExecutable="true" camunda:versionTag="1.0">
     <bpmn:laneSet id="LaneSet_12mm41t">
       <bpmn:lane id="Lane_1e38l2r" name="Recruiter">
         <bpmn:flowNodeRef>Activity_0vcb9ea</bpmn:flowNodeRef>
@@ -56,21 +56,21 @@
       <bpmndi:BPMNShape id="Lane_1e38l2r_di" bpmnElement="Lane_1e38l2r" isHorizontal="true">
         <dc:Bounds x="210" y="50" width="640" height="130" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_056lg1d_di" bpmnElement="Flow_056lg1d">
-        <di:waypoint x="451" y="117" />
-        <di:waypoint x="500" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0x4ogpc_di" bpmnElement="Flow_0x4ogpc">
-        <di:waypoint x="288" y="117" />
-        <di:waypoint x="351" y="117" />
+      <bpmndi:BPMNEdge id="Flow_0vamvgv_di" bpmnElement="Flow_0vamvgv">
+        <di:waypoint x="600" y="117" />
+        <di:waypoint x="640" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0nvowyt_di" bpmnElement="Flow_0nvowyt">
         <di:waypoint x="740" y="117" />
         <di:waypoint x="782" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0vamvgv_di" bpmnElement="Flow_0vamvgv">
-        <di:waypoint x="600" y="117" />
-        <di:waypoint x="640" y="117" />
+      <bpmndi:BPMNEdge id="Flow_0x4ogpc_di" bpmnElement="Flow_0x4ogpc">
+        <di:waypoint x="288" y="117" />
+        <di:waypoint x="351" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_056lg1d_di" bpmnElement="Flow_056lg1d">
+        <di:waypoint x="451" y="117" />
+        <di:waypoint x="500" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0w4b5c5_di" bpmnElement="Activity_0vcb9ea">
         <dc:Bounds x="351" y="77" width="100" height="80" />
