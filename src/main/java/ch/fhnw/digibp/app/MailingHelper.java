@@ -21,19 +21,24 @@ public class MailingHelper implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) {
 
-        HttpHeaders headers = createHeaders("api", "e5f4c78f466b826a709a47f3b52793a6-fa6e84b7-aaf08b9e");
+        Object recipient = delegateExecution.getVariable("recipient");
+        Object text = delegateExecution.getVariable("text");
+        Object subject = delegateExecution.getVariable("subject");
+        
+        //("e5f4c78f466b826a709a47f3b52793a6-fa6e84b7-aaf08b9e"
+        HttpHeaders headers = createHeaders("api", "bb9954d61cdacf670a6d03535cf7ec96-fa6e84b7-7fa8398b");
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
-        map.add("from", "XYZ Inc. <stephan@XYZ.inc>");
-        map.add("to", "simon.hafner@students.fhnw.ch");
-        map.add("subject", "hello");
-        map.add("text", "testing");
+        map.add("from", "XYZ Inc. <HR@mailgun.simonhafner.me>");
+        map.add("to", recipient.toString());
+        map.add("subject", subject.toString());
+        map.add("text", text.toString());
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity( "https://api.mailgun.net/v3/" + "mailgun.simonhafner.me" + "/messages", request , String.class );
+        ResponseEntity<String> response = restTemplate.postForEntity( "https://api.mailgun.net/v3/mailgun.simonhafner.me/messages", request , String.class );
     }
 
     HttpHeaders createHeaders(String username, String password){

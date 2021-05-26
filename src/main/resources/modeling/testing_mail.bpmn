@@ -4,14 +4,7 @@
     <bpmn:participant id="Participant_18jlx3t" name="test-sending" processRef="Process_0a5q47h" />
   </bpmn:collaboration>
   <bpmn:process id="Process_0a5q47h" isExecutable="true">
-    <bpmn:serviceTask id="Activity_15jbxt8" name="send mail">
-      <bpmn:extensionElements>
-        <camunda:connector>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="Input_34ntg43" />
-          </camunda:inputOutput>
-        </camunda:connector>
-      </bpmn:extensionElements>
+    <bpmn:serviceTask id="Activity_15jbxt8" name="send mail" camunda:class="ch.fhnw.digibp.app.MailingHelper">
       <bpmn:incoming>Flow_0ry9j80</bpmn:incoming>
       <bpmn:outgoing>Flow_1vip20h</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -19,6 +12,9 @@
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="recipient" label="Recipient" type="string" />
+          <camunda:formField id="text" label="text" type="string" />
+          <camunda:formField id="to" label="to" type="string" />
+          <camunda:formField id="subject" label="subject" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0rn89sm</bpmn:incoming>
@@ -39,17 +35,17 @@
       <bpmndi:BPMNShape id="Participant_18jlx3t_di" bpmnElement="Participant_18jlx3t" isHorizontal="true">
         <dc:Bounds x="129" y="80" width="531" height="190" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1vip20h_di" bpmnElement="Flow_1vip20h">
-        <di:waypoint x="530" y="170" />
-        <di:waypoint x="572" y="170" />
+      <bpmndi:BPMNEdge id="Flow_0ry9j80_di" bpmnElement="Flow_0ry9j80">
+        <di:waypoint x="380" y="170" />
+        <di:waypoint x="430" y="170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0rn89sm_di" bpmnElement="Flow_0rn89sm">
         <di:waypoint x="238" y="170" />
         <di:waypoint x="280" y="170" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ry9j80_di" bpmnElement="Flow_0ry9j80">
-        <di:waypoint x="380" y="170" />
-        <di:waypoint x="430" y="170" />
+      <bpmndi:BPMNEdge id="Flow_1vip20h_di" bpmnElement="Flow_1vip20h">
+        <di:waypoint x="530" y="170" />
+        <di:waypoint x="572" y="170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0tnop7m_di" bpmnElement="Activity_15jbxt8">
         <dc:Bounds x="430" y="130" width="100" height="80" />
