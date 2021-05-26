@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1k5z8di" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.14.0">
   <bpmn:collaboration id="Collaboration_0j9zf7l">
-    <bpmn:participant id="Participant_18jlx3t" name="test-sending" processRef="Process_0a5q47h" />
+    <bpmn:participant id="Participant_18jlx3t" name="test-sending" processRef="test-sending" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0a5q47h" isExecutable="true">
+  <bpmn:process id="test-sending" isExecutable="true" camunda:versionTag="v2.0">
     <bpmn:serviceTask id="Activity_15jbxt8" name="send mail" camunda:class="ch.fhnw.digibp.app.MailingHelper">
       <bpmn:incoming>Flow_0ry9j80</bpmn:incoming>
       <bpmn:outgoing>Flow_1vip20h</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_1ayi7gg" name="input data" camunda:formKey="mail-form">
+    <bpmn:userTask id="Activity_1ayi7gg" name="input data">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="recipient" label="Recipient" type="string" />
           <camunda:formField id="text" label="text" type="string" />
-          <camunda:formField id="to" label="to" type="string" />
           <camunda:formField id="subject" label="subject" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
