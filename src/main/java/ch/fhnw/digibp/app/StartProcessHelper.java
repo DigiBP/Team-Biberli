@@ -33,6 +33,7 @@ public class StartProcessHelper implements JavaDelegate{
 
         for (Candidate candidate : candidates) {
             if (candidate.getJobDescriptionId().equals(delegateExecution.getVariable("selectedJob"))) {
+                //TODO Hier müssen die Daten vom Candidate dem Prozess mitgegeben werden
                 restTemplate.postForObject(camundaRestUrl + "/process-definition/key/04_selection-phase/start", secondRequest, String.class);
             }
         }
