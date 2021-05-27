@@ -28,7 +28,7 @@ public class MailingHelper implements JavaDelegate {
         String subject = delegateExecution.getVariable("subject").toString();
         
         HttpHeaders headers = createHeaders("api", "bb9954d61cdacf670a6d03535cf7ec96-fa6e84b7-7fa8398b");
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("from", "XYZ Inc. <HR@mailgun.simonhafner.me>");
