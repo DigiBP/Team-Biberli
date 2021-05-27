@@ -32,9 +32,9 @@
           <camunda:formField id="jobtitle" label="Job Titel" type="string" />
           <camunda:formField id="tasks" label="Tasks to execute" type="string" />
           <camunda:formField id="experience" label="Experience Level" type="enum">
-            <camunda:value id="value_junior" name="Junior" />
-            <camunda:value id="value_professional" name="Professional" />
-            <camunda:value id="value_senior" name="Senior" />
+            <camunda:value id="Junior" name="Junior" />
+            <camunda:value id="Professional" name="Professional" />
+            <camunda:value id="Senior" name="Senior" />
           </camunda:formField>
           <camunda:formField id="salary" label="Salary" type="long" />
           <camunda:formField id="supervisor" label="Supervisor" type="string" />
