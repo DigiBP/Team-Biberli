@@ -40,7 +40,13 @@ public class PreselectionDecisionHelper implements JavaDelegate {
         Job job1 = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/kvy3mtnfoqrq05glddboc8hpeckjxssh", HttpMethod.GET, request, new ParameterizedTypeReference<List<Job>>() {
         }).getBody()).stream().filter(job -> job.getJobId().equals(jobDescriptionId)).filter(job -> job.getGrade() != null).findFirst().get();
 
+        d.setVariable("Tasks", job1.getTasks());
+        d.setVariable("Salary", job1.getSalary());
+        d.setVariable("Experience", job1.getExperience());
+        d.setVariable("Subervisor", job1.getSupervisor());
+        d.setVariable("Grade", job1.getGrade());
         d.setVariable("JobTitle", job1.getJobTitle());
+        d.setVariable("JobId", job1.getJobId());
         String neededGrade = job1.getGrade();
 
         neededGrade = neededGrade.substring(neededGrade.length() - 1);

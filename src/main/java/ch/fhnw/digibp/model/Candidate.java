@@ -11,6 +11,7 @@ public class Candidate {
     private String highestDiploma;
     private String averageGrade;
     private String mail;
+    private String address;
 
     public Candidate() {
     }
@@ -95,5 +96,14 @@ public class Candidate {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    @JsonProperty("9")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

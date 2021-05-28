@@ -71,6 +71,10 @@ public class StartProcessHelper implements JavaDelegate {
                 "         \"value\" : \"" + candidate.getMail() + "\"," +
                 "          \"type\": \"String\"" +
                 "    }," +
+                "    \"Address\" : {" +
+                "         \"value\" : \"" + candidate.getAddress() + "\"," +
+                "          \"type\": \"String\"" +
+                "    }," +
                 "    \"MobileNumber\" : {" +
                 "       \"value\" : \"" + candidate.getMobileNumber() + "\"," +
                 "       \"type\": \"String\"" +
