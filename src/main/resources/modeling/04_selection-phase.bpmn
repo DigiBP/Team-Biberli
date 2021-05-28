@@ -119,7 +119,7 @@
     <bpmn:userTask id="Activity_1blfsam" name="Pending candidate" camunda:candidateGroups="Teamleader">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="decision4" label="Accept or reject candidate?" type="boolean" />
+          <camunda:formField id="decision4" label="Accept candidate?" type="boolean" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>g3_pending</bpmn:incoming>
@@ -308,7 +308,7 @@
 "mail": Mail,
 "startdate": startdate,
 "pensum": pensum,
-"address": Address
+"address": Address,
 "salaryfinal": salaryfinal
 }]);</camunda:script>
             </camunda:inputParameter>
