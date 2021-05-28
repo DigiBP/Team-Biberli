@@ -35,7 +35,6 @@
         <bpmn:flowNodeRef>Event_07f56sc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0jncxa3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0uesrej</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1emcopu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>g4</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0wb0ohm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1ve1fa6</bpmn:flowNodeRef>
@@ -43,6 +42,7 @@
         <bpmn:flowNodeRef>Activity_142491k</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1ow283q</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1y9jus5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1emcopu</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1mn9mf9" name="HR Business Partner">
         <bpmn:flowNodeRef>Activity_0ylv1k4</bpmn:flowNodeRef>
@@ -198,14 +198,14 @@
               </camunda:map>
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">out = JSON.stringify([{ 
-"jobId": jobid,
-"jobtitle": JobTitle,
-"surname": surname,
-"name": name,
-"date_invitation": "10.06.2021",
-"time_invitation": "09:00 a.m.",
-"mail": Mail
-} ]);</camunda:inputParameter>
+"jobId": JobDescriptionId,
+"jobtitle" : JobTitle,
+"surname" : surname,
+"name" : name,
+"date_invitation" : "10.06.2021",
+"time_invitation" : "09:00 a.m.",
+"mail" : Mail
+}]);</camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/3jyprp7l05lgk4wvo7pjanaq8chmybq2</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
           </camunda:inputOutput>
@@ -251,39 +251,6 @@
       <bpmn:incoming>g2_yes</bpmn:incoming>
       <bpmn:outgoing>Flow_1py9ajn</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:userTask id="Activity_1emcopu" name="Conduct interview" camunda:candidateGroups="Recruiter">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="startdate" label="Startdate" type="date" />
-          <camunda:formField id="pensum" label="Pensum" type="long" />
-          <camunda:formField id="salaryfinal" label="Final salary" type="string" />
-          <camunda:formField id="avarage_grading" label="Average Grading" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="Salary" label="Maximum Salary" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="Tasks" label="Tasks" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="JobTitle" label="Job Title" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="Name" label="Name" type="string" />
-          <camunda:formField id="Surname" label="Surname" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1py9ajn</bpmn:incoming>
-      <bpmn:outgoing>Flow_0lgf89k</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:exclusiveGateway id="g4">
       <bpmn:incoming>Flow_1agu8mb</bpmn:incoming>
       <bpmn:outgoing>g4_accepted</bpmn:outgoing>
@@ -300,12 +267,12 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/58hmc1k9bi5oi7h8x4xwy25sh6rciton</camunda:inputParameter>
             <camunda:inputParameter name="payload">out = JSON.stringify([{ 
-"jobId": JobId,
-"jobtitle": JobTitle,
+"jobId": JobDescriptionId,
+"jobtitle": JobTitle,
 "surname": Surname,
 "name": Name,
-"mail": Mail,
-"reason": "zu blöd"
+"reason": "zu blöd",
+"mail": Mail
 }]);</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
           </camunda:inputOutput>
@@ -332,16 +299,17 @@
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify([{
-"jobId": JobId,
-"jobtitle": JobTitle,
-"surname": Surname,
-"name": Name,
-"supervisor": Supervisor,
-"mail": Mail,
-"startdate": startdate,
-"pensum": pensum,
-"address": Address,
-"salaryfinal": salaryfinal
+"jobId" : JobDescriptionId,
+"jobtitle" : JobTitle,
+"surname" : Surname,
+"name" : Name,
+"supervisor" : Supervisor,
+"mail" : Mail,
+"startdate" : startdate,
+"pensum" : pensum,
+"address" : Address,
+"tasks" : Tasks,
+"salaryfinal" : salaryfinal
 }]);</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -371,16 +339,17 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify([{
-"jobId": JobId,
-"jobtitle": JobTitle,
-"surname": Surname,
-"name": Name,
-"supervisor": Supervisor,
-"mail": Mail,
-"startdate": startdate,
-"pensum": pensum,
-"address": Address,
-"salaryfinal": salaryfinal
+"jobId" : JobDescriptionId,
+"jobtitle" : JobTitle,
+"surname" : Surname,
+"name" : Name,
+"supervisor" : Supervisor,
+"mail" : Mail,
+"startdate" : startdate,
+"pensum" : pensum,
+"address" : Address,
+"tasks" : Tasks,
+"salaryfinal" : salaryfinal
 }]);</camunda:script>
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/48iqy0mbpyltkqvrqkvikymyofcj977d</camunda:inputParameter>
@@ -435,11 +404,52 @@
           <camunda:formField id="startdate" label="Startdate" type="string" />
           <camunda:formField id="pensum" label="Pensum" type="long" />
           <camunda:formField id="salaryfinal" label="Final salary" type="string" />
-          <camunda:formField id="tasks" label="Tasks" type="string" />
+          <camunda:formField id="Tasks" label="Tasks" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_05ranw5</bpmn:incoming>
       <bpmn:outgoing>Flow_1brbbvb</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1emcopu" name="Conduct interview" camunda:candidateGroups="Recruiter">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="startdate" label="Startdate" type="date" />
+          <camunda:formField id="pensum" label="Pensum" type="long" />
+          <camunda:formField id="salaryfinal" label="Final salary" type="string" />
+          <camunda:formField id="avarage_grading" label="Average Grading" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Salary" label="Maximum Salary" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Tasks" label="Tasks" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="JobTitle" label="Job Title" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Name" label="Name" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Surname" label="Surname" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1py9ajn</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lgf89k</bpmn:outgoing>
     </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="Process_1gezfp8" isExecutable="false" />
@@ -676,9 +686,6 @@
       <bpmndi:BPMNShape id="Activity_0hc2smi_di" bpmnElement="Activity_0uesrej">
         <dc:Bounds x="1160" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1emcopu_di" bpmnElement="Activity_1emcopu">
-        <dc:Bounds x="1300" y="300" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0163wit_di" bpmnElement="g4" isMarkerVisible="true">
         <dc:Bounds x="1575" y="321" width="50" height="50" />
       </bpmndi:BPMNShape>
@@ -735,6 +742,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0dety1b_di" bpmnElement="Activity_1y9jus5">
         <dc:Bounds x="1840" y="306" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1emcopu_di" bpmnElement="Activity_1emcopu">
+        <dc:Bounds x="1300" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1ol61bo_di" bpmnElement="Participant_1ol61bo" isHorizontal="true">
         <dc:Bounds x="155" y="780" width="2335" height="60" />
