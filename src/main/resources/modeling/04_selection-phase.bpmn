@@ -105,6 +105,21 @@
             <camunda:value id="Pending" name="Pending" />
             <camunda:value id="Rejected" name="Rejected" />
           </camunda:formField>
+          <camunda:formField id="Surname" label="Surname" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Name" label="Name" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="JobTitle" label="JobTitle" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0lgf89k</bpmn:incoming>
@@ -152,7 +167,7 @@
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify([{ 
 "jobId": JobDescriptionId,
-"jobtitel": JobTitle,
+"jobtitle": JobTitle,
 "surname": Surname,
 "name": Name,
 "reason": "basic requirements not met",
@@ -184,12 +199,12 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">out = JSON.stringify([{ 
 "jobId": jobid,
-"jobtitel": JobTitle,
+"jobtitle": JobTitle,
 "surname": surname,
 "name": name,
 "date_invitation": "10.06.2021",
 "time_invitation": "09:00 a.m.",
-"mail": "sivin.manjaly@students.fhnw.ch"
+"mail": Mail
 } ]);</camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/3jyprp7l05lgk4wvo7pjanaq8chmybq2</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
@@ -212,6 +227,21 @@
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="decision2" label="Accepted?" type="boolean" />
+          <camunda:formField id="JobTitle" label="Job title" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Surname" label="Surname" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Name" label="Name" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_15kme7b</bpmn:incoming>
@@ -247,6 +277,8 @@
               <camunda:constraint name="readonly" />
             </camunda:validation>
           </camunda:formField>
+          <camunda:formField id="Name" label="Name" type="string" />
+          <camunda:formField id="Surname" label="Surname" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1py9ajn</bpmn:incoming>
