@@ -372,7 +372,7 @@
       <bpmn:incoming>Flow_1brbbvb</bpmn:incoming>
       <bpmn:outgoing>Flow_1j0s8mb</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_0ylv1k4" name="Sign contract" camunda:candidateGroups="HR Business Partner">
+    <bpmn:userTask id="Activity_0ylv1k4" name="Sign contract" camunda:candidateGroups="HRBusinessPartner">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="decision5" label="Contract signed?" type="boolean" />
