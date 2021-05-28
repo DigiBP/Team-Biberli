@@ -13,7 +13,7 @@
           <text>"Junior","Professional","Senior"</text>
         </inputValues>
       </input>
-      <input id="InputClause_0j1qeub" label="Highest Diploma">
+      <input id="InputClause_0j1qeub" label="Highest Diploma" camunda:inputVariable="highest_diploma">
         <inputExpression id="LiteralExpression_1exe12l" typeRef="string">
           <text>highest_diploma</text>
         </inputExpression>
@@ -21,7 +21,7 @@
           <text>"High School","EFZ","BM","Bachelor","Master","Doctor"</text>
         </inputValues>
       </input>
-      <input id="InputClause_031mazr" label="Avarage Grading of the last Education">
+      <input id="InputClause_031mazr" label="Avarage Grading of the last Education" camunda:inputVariable="avarage_grading">
         <inputExpression id="LiteralExpression_0vbw5ln" typeRef="double">
           <text>avarage_grading</text>
         </inputExpression>
@@ -215,7 +215,7 @@
   </decision>
   <decision id="Decision_1upsfmk" name="Decision Working Experience">
     <decisionTable id="DecisionTable_1qkusn1">
-      <input id="InputClause_07q42nd" label="Working Years">
+      <input id="InputClause_07q42nd" label="Working Years" camunda:inputVariable="working_years">
         <inputExpression id="LiteralExpression_0rm3uar" typeRef="integer">
           <text>working_years</text>
         </inputExpression>
@@ -253,12 +253,12 @@
         <dc:Bounds height="80" width="180" x="290" y="160" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_0ir1r0k" dmnElementRef="InformationRequirement_0uyilc1">
-        <di:waypoint x="380" y="310" />
-        <di:waypoint x="380" y="260" />
-        <di:waypoint x="380" y="240" />
+        <di:waypoint x="590" y="200" />
+        <di:waypoint x="490" y="200" />
+        <di:waypoint x="470" y="200" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_1tx6cc9" dmnElementRef="Decision_1upsfmk">
-        <dc:Bounds height="80" width="180" x="290" y="310" />
+        <dc:Bounds height="80" width="180" x="590" y="160" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
