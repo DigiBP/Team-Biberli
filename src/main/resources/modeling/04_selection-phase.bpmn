@@ -40,9 +40,9 @@
         <bpmn:flowNodeRef>Activity_0wb0ohm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1ve1fa6</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_01whmsd</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1y9jus5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_142491k</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1ow283q</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1y9jus5</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1mn9mf9" name="HR Business Partner">
         <bpmn:flowNodeRef>Activity_0ylv1k4</bpmn:flowNodeRef>
@@ -268,12 +268,12 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/58hmc1k9bi5oi7h8x4xwy25sh6rciton</camunda:inputParameter>
             <camunda:inputParameter name="payload">out = JSON.stringify([{ 
-"jobId":"3",
-"jobtitel": "Big Boss",
-"surname":"Max",
-"name":"Muster",
-"reason":"zu blöd",
-"mail":"sivin.manjaly@students.fhnw.ch"
+"jobId": JobId,
+"jobtitle": JobTitle,
+"surname": Surname,
+"name": Name,
+"mail": Mail,
+"reason": "zu blöd"
 }]);</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
           </camunda:inputOutput>
@@ -320,18 +320,6 @@
       <bpmn:incoming>g3_accepted</bpmn:incoming>
       <bpmn:outgoing>Flow_05ranw5</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_1y9jus5" name="Finalize contract" camunda:candidateGroups="Recruiter">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="startdate" label="Startdate" type="string" />
-          <camunda:formField id="pensum" label="Pensum" type="long" />
-          <camunda:formField id="salaryfinal" label="Final salary" type="string" />
-          <camunda:formField id="tasks" label="Tasks" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_05ranw5</bpmn:incoming>
-      <bpmn:outgoing>Flow_1brbbvb</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1brbbvb" sourceRef="Activity_1y9jus5" targetRef="Activity_142491k" />
     <bpmn:sequenceFlow id="Flow_1s50atr" sourceRef="Activity_0ylv1k4" targetRef="g5" />
     <bpmn:sequenceFlow id="g5_yes" name="Yes" sourceRef="g5" targetRef="g6">
@@ -359,7 +347,7 @@
 "mail": Mail,
 "startdate": startdate,
 "pensum": pensum,
-"address": Address
+"address": Address,
 "salaryfinal": salaryfinal
 }]);</camunda:script>
             </camunda:inputParameter>
@@ -409,6 +397,18 @@
     <bpmn:endEvent id="Event_1ow283q" name="Candidate rejected">
       <bpmn:incoming>Flow_1phyfa5</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:userTask id="Activity_1y9jus5" name="Finalize contract" camunda:candidateGroups="Recruiter">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="startdate" label="Startdate" type="string" />
+          <camunda:formField id="pensum" label="Pensum" type="long" />
+          <camunda:formField id="salaryfinal" label="Final salary" type="string" />
+          <camunda:formField id="tasks" label="Tasks" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_05ranw5</bpmn:incoming>
+      <bpmn:outgoing>Flow_1brbbvb</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="Process_1gezfp8" isExecutable="false" />
   <bpmn:message id="Message_0xe7ef0" name="Message_3vv5320" />
@@ -662,9 +662,6 @@
       <bpmndi:BPMNShape id="Activity_0nlyiwl_di" bpmnElement="Activity_01whmsd">
         <dc:Bounds x="1710" y="306" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0dety1b_di" bpmnElement="Activity_1y9jus5">
-        <dc:Bounds x="1840" y="306" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ll68lx_di" bpmnElement="Activity_142491k">
         <dc:Bounds x="1970" y="306" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -704,6 +701,9 @@
           <dc:Bounds x="775" y="455" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dety1b_di" bpmnElement="Activity_1y9jus5">
+        <dc:Bounds x="1840" y="306" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1ol61bo_di" bpmnElement="Participant_1ol61bo" isHorizontal="true">
         <dc:Bounds x="155" y="780" width="2335" height="60" />
       </bpmndi:BPMNShape>
@@ -723,7 +723,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_05a6hpg_di" bpmnElement="Flow_05a6hpg">
         <di:waypoint x="1890" y="780" />
-        <di:waypoint x="1890" y="390" />
+        <di:waypoint x="1890" y="386" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1797" y="746" width="87" height="27" />
         </bpmndi:BPMNLabel>
