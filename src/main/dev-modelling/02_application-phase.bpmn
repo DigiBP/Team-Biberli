@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02e7kgy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.14.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02e7kgy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.14.0">
   <bpmn:collaboration id="Collaboration_0xa675o">
     <bpmn:participant id="Participant_1emet1j" name="XYZ Inc." processRef="Process_0g7ykcf" />
     <bpmn:participant id="Participant_0hwzc9f" name="Candidates" processRef="Process_0g4u0n6" />
-    <bpmn:messageFlow id="Flow_0zrzh70" name="Job Application Form" sourceRef="Activity_13wfxl3" targetRef="StartEvent_1" />
+    <bpmn:messageFlow id="Flow_0zrzh70" name="Job application form" sourceRef="Activity_13wfxl3" targetRef="StartEvent_1" />
   </bpmn:collaboration>
   <bpmn:process id="Process_0g7ykcf" isExecutable="true">
     <bpmn:intermediateCatchEvent id="StartEvent_1" name="Application received">
       <bpmn:outgoing>Flow_1wrxmdw</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0xdvhw1" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="Activity_1t57e94" name="Save Job Application">
+    <bpmn:serviceTask id="Activity_1t57e94" name="Save job application">
       <bpmn:incoming>Flow_1wrxmdw</bpmn:incoming>
       <bpmn:outgoing>Flow_1a4vjcg</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1mcmiye">
         <bpmn:targetRef>DataStoreReference_1m9mldu</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:dataStoreReference id="DataStoreReference_1m9mldu" name="Google Sheet" />
+    <bpmn:dataStoreReference id="DataStoreReference_1m9mldu" name="Application Form Responses" />
     <bpmn:sequenceFlow id="Flow_1wrxmdw" sourceRef="StartEvent_1" targetRef="Activity_1t57e94" />
     <bpmn:sequenceFlow id="Flow_1a4vjcg" sourceRef="Activity_1t57e94" targetRef="Event_1brjcw1" />
-    <bpmn:endEvent id="Event_1brjcw1" name="Job Application is saved in Database">
+    <bpmn:endEvent id="Event_1brjcw1" name="Job application saved">
       <bpmn:incoming>Flow_1a4vjcg</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:dataStoreReference id="DataStoreReference_0eogh32" name="Open Jobs List" />
   </bpmn:process>
   <bpmn:process id="Process_0g4u0n6" isExecutable="false">
-    <bpmn:startEvent id="Event_0qix2fg" name="Job Application online">
+    <bpmn:startEvent id="Event_0qix2fg" name="Job needed">
       <bpmn:outgoing>Flow_0agrcj5</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:manualTask id="Activity_00n5ugl" name="Select job offer">
       <bpmn:incoming>Flow_0ia36ir</bpmn:incoming>
       <bpmn:outgoing>Flow_1bk3sru</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:userTask id="Activity_00vfps4" name="Open Job LInk (XYZ Inc. open jobs)" camunda:assignee="Candidate">
+    <bpmn:userTask id="Activity_00vfps4" name="Open job link" camunda:assignee="Candidate">
       <bpmn:incoming>Flow_0agrcj5</bpmn:incoming>
       <bpmn:outgoing>Flow_0ia36ir</bpmn:outgoing>
+      <bpmn:property id="Property_0vlloe0" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1wryl6u">
+        <bpmn:sourceRef>DataStoreReference_0eogh32</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0vlloe0</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_130rsog" name="Fill in Job Application Form" camunda:assignee="Candidate">
+    <bpmn:userTask id="Activity_130rsog" name="Fill in job application form" camunda:assignee="Candidate">
       <bpmn:incoming>Flow_1bk3sru</bpmn:incoming>
       <bpmn:outgoing>Flow_0wb4i8j</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sendTask id="Activity_13wfxl3" name="Submit Job Application Form">
+    <bpmn:sendTask id="Activity_13wfxl3" name="Submit job application form">
       <bpmn:incoming>Flow_0wb4i8j</bpmn:incoming>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1hut1t1">
         <bpmn:targetRef>DataObjectReference_1huwuyk</bpmn:targetRef>
@@ -50,7 +56,7 @@
     <bpmn:sequenceFlow id="Flow_0ia36ir" sourceRef="Activity_00vfps4" targetRef="Activity_00n5ugl" />
     <bpmn:sequenceFlow id="Flow_1bk3sru" sourceRef="Activity_00n5ugl" targetRef="Activity_130rsog" />
     <bpmn:sequenceFlow id="Flow_0wb4i8j" sourceRef="Activity_130rsog" targetRef="Activity_13wfxl3" />
-    <bpmn:dataObjectReference id="DataObjectReference_1huwuyk" name="Job Application Form" dataObjectRef="DataObject_0hsbcpk" />
+    <bpmn:dataObjectReference id="DataObjectReference_1huwuyk" name="Application Form" dataObjectRef="DataObject_0hsbcpk" />
     <bpmn:dataObject id="DataObject_0hsbcpk" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -78,13 +84,19 @@
       <bpmndi:BPMNShape id="DataStoreReference_1m9mldu_di" bpmnElement="DataStoreReference_1m9mldu">
         <dc:Bounds x="1015" y="225" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1006" y="282" width="69" height="14" />
+          <dc:Bounds x="1000" y="282" width="82" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1brjcw1_di" bpmnElement="Event_1brjcw1">
         <dc:Bounds x="1092" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1067" y="185" width="87" height="40" />
+          <dc:Bounds x="1074" y="185" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_0eogh32_di" bpmnElement="DataStoreReference_0eogh32">
+        <dc:Bounds x="355" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="343" y="205" width="75" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0qk2bwc_di" bpmnElement="Participant_0hwzc9f" isHorizontal="true">
@@ -109,7 +121,7 @@
       <bpmndi:BPMNShape id="Event_0qix2fg_di" bpmnElement="Event_0qix2fg">
         <dc:Bounds x="242" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="223" y="455" width="75" height="27" />
+          <dc:Bounds x="233" y="455" width="58" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_01f8fsd_di" bpmnElement="Activity_00n5ugl">
@@ -127,7 +139,7 @@
       <bpmndi:BPMNShape id="DataObjectReference_1huwuyk_di" bpmnElement="DataObjectReference_1huwuyk">
         <dc:Bounds x="952" y="405" width="36" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="933" y="462" width="75" height="27" />
+          <dc:Bounds x="930" y="462" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1mcmiye_di" bpmnElement="DataOutputAssociation_1mcmiye">
@@ -142,8 +154,12 @@
         <di:waypoint x="830" y="390" />
         <di:waypoint x="830" y="178" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="742" y="256" width="75" height="27" />
+          <dc:Bounds x="743" y="256" width="74" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1wryl6u_di" bpmnElement="DataInputAssociation_1wryl6u">
+        <di:waypoint x="380" y="285" />
+        <di:waypoint x="380" y="390" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
