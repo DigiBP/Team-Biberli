@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Job {
     private String jobId;
+    private String grade;
 
     public Job() {
     }
@@ -19,5 +20,14 @@ public class Job {
 
     public void setJobId(String jobId) {
         this.jobId = jobId;
+    }
+
+    @JsonProperty("6")
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }
