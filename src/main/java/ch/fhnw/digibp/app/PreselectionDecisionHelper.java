@@ -24,21 +24,24 @@ public class PreselectionDecisionHelper implements JavaDelegate {
         Map<String, String> dmnResultMap = (Map<String, String>) dmnResultList.get(0);
         String grade = dmnResultMap.get("decision_preselection");
 
-        if (Integer.parseInt(grade) >= getNeededGrade((String) delegateExecution.getVariable("JobDescriptionId"))) {
+        if (Integer.parseInt(grade) >= getNeededGrade((String) delegateExecution.getVariable("JobDescriptionId"), delegateExecution)) {
             delegateExecution.setVariable("decision", "yes");
         } else {
             delegateExecution.setVariable("decision", "no");
         }
     }
 
-    private int getNeededGrade(String jobDescriptionId) {
+    private int getNeededGrade(String jobDescriptionId, DelegateExecution d) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<String>("", headers);
         RestTemplate restTemplate = new RestTemplate();
 
-        String neededGrade = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/kvy3mtnfoqrq05glddboc8hpeckjxssh", HttpMethod.GET, request, new ParameterizedTypeReference<List<Job>>() {
-        }).getBody()).stream().filter(job -> job.getJobId().equals(jobDescriptionId)).filter(job -> job.getGrade() != null).findFirst().get().getGrade();
+        Job job1 = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/kvy3mtnfoqrq05glddboc8hpeckjxssh", HttpMethod.GET, request, new ParameterizedTypeReference<List<Job>>() {
+        }).getBody()).stream().filter(job -> job.getJobId().equals(jobDescriptionId)).filter(job -> job.getGrade() != null).findFirst().get();
+
+        d.setVariable("JobTitle", job1.getJobTitle());
+        String neededGrade = job1.getGrade();
 
         neededGrade = neededGrade.substring(neededGrade.length() - 1);
         return Integer.parseInt(neededGrade);

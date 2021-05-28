@@ -35,7 +35,6 @@ public class StartProcessHelper implements JavaDelegate {
 
         for (Candidate candidate : candidates) {
             if (candidate.getJobDescriptionId().equals(delegateExecution.getVariable("selectedJob"))) {
-                //TODO Hier müssen die Daten vom Candidate dem Prozess mitgegeben werden
                 String json = getJson(candidate);
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode rootNode = mapper.readTree(json);
@@ -67,6 +66,10 @@ public class StartProcessHelper implements JavaDelegate {
                 "   \"highest_diploma\" : {" +
                 "       \"value\" : \"" + candidate.getHighestDiploma() + "\"," +
                 "       \"type\": \"String\"" +
+                "    }," +
+                "    \"Mail\" : {" +
+                "         \"value\" : \"" + candidate.getMail() + "\"," +
+                "          \"type\": \"String\"" +
                 "    }," +
                 "    \"MobileNumber\" : {" +
                 "       \"value\" : \"" + candidate.getMobileNumber() + "\"," +
