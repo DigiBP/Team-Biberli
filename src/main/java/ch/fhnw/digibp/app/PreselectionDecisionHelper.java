@@ -43,7 +43,7 @@ public class PreselectionDecisionHelper implements JavaDelegate {
         d.setVariable("Tasks", job1.getTasks());
         d.setVariable("Salary", job1.getSalary());
         d.setVariable("Experience", job1.getExperience());
-        d.setVariable("Subervisor", job1.getSupervisor());
+        d.setVariable("Supervisor", job1.getSupervisor());
         d.setVariable("Grade", job1.getGrade());
         d.setVariable("JobTitle", job1.getJobTitle());
         d.setVariable("JobId", job1.getJobId());
