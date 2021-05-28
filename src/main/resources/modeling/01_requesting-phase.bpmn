@@ -33,62 +33,6 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "true"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0d580g8" sourceRef="Activity_1hk1tgx" targetRef="Activity_1obtlnm" />
-    <bpmn:userTask id="describe_job_request" name="Describe job request" camunda:candidateGroups="Teamleader">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="jobtitle" label="Job Titel" type="string" />
-          <camunda:formField id="tasks" label="Tasks to execute" type="string" />
-          <camunda:formField id="experience" label="Experience Level" type="enum">
-            <camunda:value id="Junior" name="Junior" />
-            <camunda:value id="Professional" name="Professional" />
-            <camunda:value id="Senior" name="Senior" />
-          </camunda:formField>
-          <camunda:formField id="salary" label="Salary" type="long" />
-          <camunda:formField id="supervisor" label="Supervisor" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0vyg4vf</bpmn:incoming>
-      <bpmn:outgoing>Flow_1snor9m</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="correct_job_request" name="Correct Request" camunda:candidateGroups="Teamleader">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="jobtitle" label="Job Titel" type="string" />
-          <camunda:formField id="tasks" label="Tasks to execute" type="string" />
-          <camunda:formField id="experience" label="Experience Level" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="salary" label="Salary" type="long" />
-          <camunda:formField id="supervisor" label="Supervisor" type="string" />
-          <camunda:formField id="comments" label="Comments" type="string">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="skillgrading" label="Grade" type="enum">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-            <camunda:value id="Grade_1" name="Grade_1" />
-            <camunda:value id="Grade_2" name="Grade_2" />
-            <camunda:value id="Grade_3" name="Grade_3" />
-            <camunda:value id="Grade_4" name="Grade_4" />
-            <camunda:value id="Grade_5" name="Grade_5" />
-            <camunda:value id="Grade_6" name="Grade_6" />
-            <camunda:value id="Grade_7" name="Grade_7" />
-            <camunda:value id="Grade_8" name="Grade_8" />
-            <camunda:value id="Grade_9" name="Grade_9" />
-            <camunda:value id="Grade_10" name="Grade_10" />
-            <camunda:value id="Grade_11" name="Grade_11" />
-            <camunda:value id="Grade_12" name="Grade_12" />
-          </camunda:formField>
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1o0keaj</bpmn:incoming>
-      <bpmn:outgoing>Flow_08j4j66</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:exclusiveGateway id="Gateway_067yf7u" name="Approved?">
       <bpmn:incoming>Flow_12xuxcn</bpmn:incoming>
       <bpmn:outgoing>Flow_1o0keaj</bpmn:outgoing>
@@ -133,6 +77,34 @@
     <bpmn:endEvent id="Event_0jhksn2" name="New job position published">
       <bpmn:incoming>Flow_1mm058x</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:userTask id="describe_job_request" name="Describe job request" camunda:candidateGroups="Teamleader">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="jobtitle" label="Job Titel" type="string" />
+          <camunda:formField id="tasks" label="Tasks to execute" type="string" />
+          <camunda:formField id="experience" label="Experience Level" type="string" />
+          <camunda:formField id="salary" label="Salary" type="long" />
+          <camunda:formField id="supervisor" label="Supervisor" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0vyg4vf</bpmn:incoming>
+      <bpmn:outgoing>Flow_1snor9m</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="correct_job_request" name="Correct Request" camunda:candidateGroups="Teamleader">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="jobtitle" label="Job Titel" type="string" />
+          <camunda:formField id="tasks" label="Tasks to execute" type="string" />
+          <camunda:formField id="experience" label="Experience Level" type="string" />
+          <camunda:formField id="salary" label="Salary" type="long" />
+          <camunda:formField id="supervisor" label="Supervisor" type="string" />
+          <camunda:formField id="comments" label="Comments" type="string" />
+          <camunda:formField id="skillgrading" label="Grade" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1o0keaj</bpmn:incoming>
+      <bpmn:outgoing>Flow_08j4j66</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:userTask id="approve_job_request" name="Approve job request" camunda:candidateGroups="HRBusinessPartner">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -163,20 +135,7 @@
           </camunda:formField>
           <camunda:formField id="approvement" label="Approve Request?" type="boolean" defaultValue="true" />
           <camunda:formField id="comments" label="Comments" type="string" />
-          <camunda:formField id="skillgrading" label="Grade" type="enum">
-            <camunda:value id="Grade_1" name="Grade_1" />
-            <camunda:value id="Grade_2" name="Grade_2" />
-            <camunda:value id="Grade_3" name="Grade_3" />
-            <camunda:value id="Grade_4" name="Grade_4" />
-            <camunda:value id="Grade_5" name="Grade_5" />
-            <camunda:value id="Grade_6" name="Grade_6" />
-            <camunda:value id="Grade_7" name="Grade_7" />
-            <camunda:value id="Grade_8" name="Grade_8" />
-            <camunda:value id="Grade_9" name="Grade_9" />
-            <camunda:value id="Grade_10" name="Grade_10" />
-            <camunda:value id="Grade_11" name="Grade_11" />
-            <camunda:value id="Grade_12" name="Grade_12" />
-          </camunda:formField>
+          <camunda:formField id="skillgrading" label="Grade" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1snor9m</bpmn:incoming>
@@ -208,8 +167,8 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_08j4j66_di" bpmnElement="Flow_08j4j66">
-        <di:waypoint x="530" y="169" />
-        <di:waypoint x="485" y="169" />
+        <di:waypoint x="530" y="167" />
+        <di:waypoint x="485" y="167" />
         <di:waypoint x="485" y="270" />
         <di:waypoint x="390" y="270" />
         <di:waypoint x="390" y="293" />
@@ -224,7 +183,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1o0keaj_di" bpmnElement="Flow_1o0keaj">
         <di:waypoint x="580" y="308" />
-        <di:waypoint x="580" y="209" />
+        <di:waypoint x="580" y="207" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="530" y="280" width="40" height="14" />
         </bpmndi:BPMNLabel>
@@ -243,12 +202,6 @@
           <dc:Bounds x="254" y="194" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1v4nudu_di" bpmnElement="describe_job_request">
-        <dc:Bounds x="340" y="129" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1pubcny_di" bpmnElement="correct_job_request">
-        <dc:Bounds x="530" y="129" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_067yf7u_di" bpmnElement="Gateway_067yf7u" isMarkerVisible="true">
         <dc:Bounds x="555" y="308" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -266,6 +219,12 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="919" y="361" width="81" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1v4nudu_di" bpmnElement="describe_job_request">
+        <dc:Bounds x="340" y="129" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pubcny_di" bpmnElement="correct_job_request">
+        <dc:Bounds x="530" y="127" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0qqyzk3_di" bpmnElement="approve_job_request">
         <dc:Bounds x="340" y="293" width="100" height="80" />
