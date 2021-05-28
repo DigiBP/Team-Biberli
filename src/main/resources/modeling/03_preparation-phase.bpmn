@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bsqfz9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bsqfz9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:collaboration id="Collaboration_1yuujpz">
     <bpmn:participant id="Participant_1vgktf9" name="XYZ Inc." processRef="preparation-phase" />
   </bpmn:collaboration>
-  <bpmn:process id="preparation-phase" name="preparation-phase" isExecutable="true" camunda:versionTag="1.0">
+  <bpmn:process id="preparation-phase" name="03_preparation-phase" isExecutable="true" camunda:versionTag="2.0">
     <bpmn:laneSet id="LaneSet_12mm41t">
       <bpmn:lane id="Lane_1e38l2r" name="Recruiter">
         <bpmn:flowNodeRef>Activity_0vcb9ea</bpmn:flowNodeRef>
@@ -13,7 +13,7 @@
         <bpmn:flowNodeRef>Event_0uuxa7q</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:serviceTask id="Activity_0vcb9ea" name="GetJobOffers" camunda:class="ch.fhnw.digibp.app.Helper">
+    <bpmn:serviceTask id="Activity_0vcb9ea" name="get job offers" camunda:class="ch.fhnw.digibp.app.Helper">
       <bpmn:incoming>Flow_0x4ogpc</bpmn:incoming>
       <bpmn:outgoing>Flow_056lg1d</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -24,7 +24,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0x4ogpc</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1jbb2ju" name="select job Offer" camunda:assignee="Recruiter">
+    <bpmn:userTask id="Activity_1jbb2ju" name="select job offer" camunda:candidateGroups="Recruiter">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobOfferIds" label="tbd Select available ids" type="enum" />
@@ -35,7 +35,7 @@
       <bpmn:incoming>Flow_056lg1d</bpmn:incoming>
       <bpmn:outgoing>Flow_0vamvgv</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_0jv4nr1" name="start Process of job offer" camunda:class="ch.fhnw.digibp.app.StartProcessHelper">
+    <bpmn:serviceTask id="Activity_0jv4nr1" name="start process of job offer" camunda:class="ch.fhnw.digibp.app.StartProcessHelper">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="selectedJob">${selectedJob}</camunda:inputParameter>

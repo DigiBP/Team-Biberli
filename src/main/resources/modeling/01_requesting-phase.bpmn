@@ -3,7 +3,7 @@
   <bpmn:collaboration id="Collaboration_1w9gfpp">
     <bpmn:participant id="Participant_1" name="XYZ Inc." processRef="requesting-phase" />
   </bpmn:collaboration>
-  <bpmn:process id="requesting-phase" name="requesting-phase" isExecutable="true" camunda:versionTag="1.7">
+  <bpmn:process id="requesting-phase" name="01_requesting-phase" isExecutable="true" camunda:versionTag="2.0">
     <bpmn:laneSet id="LaneSet_0i9bvyr">
       <bpmn:lane id="Lane_0efgehs" name="Teamleader">
         <bpmn:flowNodeRef>Event_0x6uw6m</bpmn:flowNodeRef>
@@ -33,7 +33,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvement == "true"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0d580g8" sourceRef="Activity_1hk1tgx" targetRef="Activity_1obtlnm" />
-    <bpmn:userTask id="describe_job_request" name="Describe job request">
+    <bpmn:userTask id="describe_job_request" name="Describe job request" camunda:assignee="Teamleader">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobtitle" label="Job Titel" type="string" />
@@ -50,7 +50,7 @@
       <bpmn:incoming>Flow_0vyg4vf</bpmn:incoming>
       <bpmn:outgoing>Flow_1snor9m</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="correct_job_request" name="Correct Request">
+    <bpmn:userTask id="correct_job_request" name="Correct Request" camunda:assignee="Teamleader">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobtitle" label="Job Titel" type="string" />
@@ -94,7 +94,7 @@
       <bpmn:outgoing>Flow_1o0keaj</bpmn:outgoing>
       <bpmn:outgoing>Flow_1vocks0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="approve_job_request" name="Approve job request">
+    <bpmn:userTask id="approve_job_request" name="Approve job request" camunda:assignee="HR Business Partner">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobtitle" label="Job Titel" type="string">
