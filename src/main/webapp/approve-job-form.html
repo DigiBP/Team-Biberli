@@ -1,0 +1,86 @@
+<form role="form" name="approveJobForm">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="jobtitle">Job Title:</label><br>
+                <input readonly type="text" id="jobtitle"
+                       cam-variable-name="jobtitle"
+                       cam-variable-type="String"><br>
+
+                <label for="tasks">Tasks:</label><br>
+                <input readonly type="text" id="tasks"
+                       cam-variable-name="tasks"
+                       cam-variable-type="String"><br>
+
+                <label for="experience">Experience:</label><br>
+                <div class="controls">
+                    <select readonly cam-variable-name="experience"
+                            cam-variable-type="String">
+                        <option id="value_junior" value="value_junior">Junior</option>
+                        <option id="value_senior" value="value_senior">Senior</option>
+                        <option id="value_professional" value="value_professional">Professional</option>
+
+                    </select>
+                </div>
+                <script cam-script type="text/form-script">
+                    var variableManager = camForm.variableManager;
+                    switch (variableManager.variable('experience')) {
+                        case "value_junior":
+                            document.querySelector('#' + 'value_junior').selected = true
+                            break;
+                        case "value_senior":
+                            document.querySelector('#' + 'value_senior').selected = true
+                            break;
+                        case "value_professional":
+                            document.querySelector('#' + 'value_professional').selected = true
+                            break;
+                        default:
+                            document.querySelector('#' + 'value_junior').selected = true
+                            break;
+                    }
+                </script>
+                <br>
+
+                <label for="salary">Salary:</label><br>
+                <input readonly type="text" id="salary"
+                       cam-variable-name="salary"
+                       cam-variable-type="String"><br>
+
+                <label for="supervisor">Supervisor:</label><br>
+                <input readonly type="text" id="supervisor"
+                       cam-variable-name="supervisor"
+                       cam-variable-type="String"><br>
+
+                <label for="approvement">Approve Request?</label><br>
+                <input type="checkbox"
+                       cam-variable-name="approvement"
+                       cam-variable-type="Boolean"/><br>
+
+                <label for="comments">Comment:</label><br>
+                <input type="text" id="comments"
+                       cam-variable-name="comments"
+                       cam-variable-type="String"><br>
+
+                <label for="skillgrading">Grade:</label><br>
+                <div class="controls">
+                    <select cam-variable-name="skillgrading"
+                            cam-variable-type="String">
+                        <option value="Grade_1">Grade_1</option>
+                        <option value="Grade_2">Grade_2</option>
+                        <option value="Grade_3">Grade_3</option>
+                        <option value="Grade_4">Grade_4</option>
+                        <option value="Grade_5">Grade_5</option>
+                        <option value="Grade_6">Grade_6</option>
+                        <option value="Grade_7">Grade_7</option>
+                        <option value="Grade_8">Grade_8</option>
+                        <option value="Grade_9">Grade_9</option>
+                        <option value="Grade_10">Grade_10</option>
+                        <option value="Grade_10">Grade_11</option>
+                        <option value="Grade_10">Grade_12</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</form>

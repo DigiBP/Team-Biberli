@@ -1,0 +1,37 @@
+<form role="form" name="describeJobForm">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="jobtitle">Job Title:</label><br>
+                <input type="text" id="jobtitle"
+                       cam-variable-name="jobtitle"
+                       cam-variable-type="String"><br>
+
+                <label for="tasks">Tasks:</label><br>
+                <input type="text" id="tasks"
+                       cam-variable-name="tasks"
+                       cam-variable-type="String"><br>
+
+                <label for="experience">Experience:</label><br>
+                <div class="controls">
+                    <select cam-variable-name="experience"
+                            cam-variable-type="String">
+                        <option value="value_junior">Junior</option>
+                        <option value="value_senior">Senior</option>
+                        <option value="value_professional">Professional</option>
+                    </select>
+                </div><br>
+
+                <label for="salary">Salary:</label><br>
+                <input type="text" id="salary"
+                       cam-variable-name="salary"
+                       cam-variable-type="String"><br>
+
+                <label for="supervisor">Supervisor:</label><br>
+                <input type="text" id="supervisor"
+                       cam-variable-name="supervisor"
+                       cam-variable-type="String"><br>
+            </div>
+        </div>
+    </div>
+</form>
