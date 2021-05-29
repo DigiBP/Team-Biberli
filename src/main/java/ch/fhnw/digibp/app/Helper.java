@@ -1,8 +1,10 @@
 package ch.fhnw.digibp.app;
 
 import ch.fhnw.digibp.model.Candidate;
+import ch.fhnw.digibp.model.Job;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.spin.Spin;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -28,14 +32,12 @@ public class Helper implements JavaDelegate {
         List<String> jobOfferIds = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/q2afwk840ajotdamwsfpoujg8beaa751", HttpMethod.GET, request, new ParameterizedTypeReference<List<Candidate>>() {
         }).getBody()).stream().map(Candidate::getJobDescriptionId).distinct().collect(Collectors.toList());
 
-        delegateExecution.setVariable("availableJobsToStart", jobOfferIds.toString());
+        List<Job> jobs = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/kvy3mtnfoqrq05glddboc8hpeckjxssh", HttpMethod.GET, request, new ParameterizedTypeReference<List<Job>>() {
+        }).getBody()).stream().filter(Objects::nonNull).filter(job -> jobOfferIds.contains(job.getJobId())).collect(Collectors.toList());
 
-        //TODO set options for enum jobOfferIds
-//        Map<String, String> values = new LinkedHashMap<>();
-//        jobOfferIds.forEach(s -> values.put(s, s));
-//        EnumFormType formType = new EnumFormType(values);
-//        delegateExecution.setVariable("jobOfferIds", formType);
-//        System.out.println(delegateExecution.getVariable("jobOfferIds"));
-//        System.out.println(delegateExecution.getVariable("jobOfferIds").getClass().getName());
+        Map<String, String> jobsMap = new HashMap<>();
+        jobs.forEach(s -> jobsMap.put(s.getJobId(), ""+s.getJobId() +" - "+ s.getJobTitle()));
+
+        delegateExecution.setVariable("AVAILABLE_JOB_ID",  Spin.JSON(jobsMap));
     }
 }

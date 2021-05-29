@@ -40,6 +40,14 @@ public class PreselectionDecisionHelper implements JavaDelegate {
         Job job1 = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/kvy3mtnfoqrq05glddboc8hpeckjxssh", HttpMethod.GET, request, new ParameterizedTypeReference<List<Job>>() {
         }).getBody()).stream().filter(job -> job.getJobId().equals(jobDescriptionId)).filter(job -> job.getGrade() != null).findFirst().get();
 
+        setProcessVariableOnTheFly(d, job1);
+        String neededGrade = job1.getGrade();
+
+        neededGrade = neededGrade.substring(neededGrade.length() - 1);
+        return Integer.parseInt(neededGrade);
+    }
+
+    private void setProcessVariableOnTheFly(DelegateExecution d, Job job1) {
         d.setVariable("Tasks", job1.getTasks());
         d.setVariable("Salary", job1.getSalary());
         d.setVariable("Experience", job1.getExperience());
@@ -47,9 +55,5 @@ public class PreselectionDecisionHelper implements JavaDelegate {
         d.setVariable("Grade", job1.getGrade());
         d.setVariable("JobTitle", job1.getJobTitle());
         d.setVariable("JobId", job1.getJobId());
-        String neededGrade = job1.getGrade();
-
-        neededGrade = neededGrade.substring(neededGrade.length() - 1);
-        return Integer.parseInt(neededGrade);
     }
 }
