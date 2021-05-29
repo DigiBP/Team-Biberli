@@ -1,15 +1,11 @@
 package ch.fhnw.digibp.app;
 
 import ch.fhnw.digibp.model.Job;
+import ch.fhnw.digibp.service.JobService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +13,9 @@ import java.util.Objects;
 
 @Component
 public class PreselectionDecisionHelper implements JavaDelegate {
+
+    @Autowired
+    JobService jobService;
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
@@ -32,13 +31,9 @@ public class PreselectionDecisionHelper implements JavaDelegate {
     }
 
     private int getNeededGrade(String jobDescriptionId, DelegateExecution d) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request = new HttpEntity<String>("", headers);
-        RestTemplate restTemplate = new RestTemplate();
 
-        Job job1 = Objects.requireNonNull(restTemplate.exchange("https://hook.integromat.com/kvy3mtnfoqrq05glddboc8hpeckjxssh", HttpMethod.GET, request, new ParameterizedTypeReference<List<Job>>() {
-        }).getBody()).stream().filter(job -> job.getJobId().equals(jobDescriptionId)).filter(job -> job.getGrade() != null).findFirst().get();
+
+        Job job1 = Objects.requireNonNull(jobService.getJobs()).stream().filter(job -> job.getJobId().equals(jobDescriptionId)).filter(job -> job.getGrade() != null).findFirst().get();
 
         setProcessVariableOnTheFly(d, job1);
         String neededGrade = job1.getGrade();
@@ -46,6 +41,8 @@ public class PreselectionDecisionHelper implements JavaDelegate {
         neededGrade = neededGrade.substring(neededGrade.length() - 1);
         return Integer.parseInt(neededGrade);
     }
+
+
 
     private void setProcessVariableOnTheFly(DelegateExecution d, Job job1) {
         d.setVariable("Tasks", job1.getTasks());

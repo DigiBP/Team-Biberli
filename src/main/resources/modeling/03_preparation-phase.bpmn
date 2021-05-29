@@ -13,7 +13,7 @@
         <bpmn:flowNodeRef>Event_0uuxa7q</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:serviceTask id="Activity_0vcb9ea" name="get job offers" camunda:class="ch.fhnw.digibp.app.Helper">
+    <bpmn:serviceTask id="Activity_0vcb9ea" name="get job offers" camunda:class="ch.fhnw.digibp.app.JobEnumHelper">
       <bpmn:incoming>Flow_0x4ogpc</bpmn:incoming>
       <bpmn:outgoing>Flow_056lg1d</bpmn:outgoing>
     </bpmn:serviceTask>
