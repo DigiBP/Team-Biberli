@@ -1,20 +1,20 @@
-<form role="form" name="approveJobForm">
+<form role="form" name="correctJobRequestForm">
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group">
                 <label for="jobtitle">Job Title:</label><br>
-                <input readonly type="text" id="jobtitle"
+                <input type="text" id="jobtitle"
                        cam-variable-name="jobtitle"
                        cam-variable-type="String"><br>
 
                 <label for="tasks">Tasks:</label><br>
-                <input readonly type="text" id="tasks"
+                <input type="text" id="tasks"
                        cam-variable-name="tasks"
                        cam-variable-type="String"><br>
 
                 <label for="experience">Experience:</label><br>
                 <div class="controls">
-                    <select readonly cam-variable-name="experience"
+                    <select cam-variable-name="experience"
                             cam-variable-type="String">
                         <option id="value_junior" value="value_junior">Junior</option>
                         <option id="value_senior" value="value_senior">Senior</option>
@@ -42,12 +42,12 @@
                 <br>
 
                 <label for="salary">Salary:</label><br>
-                <input readonly type="text" id="salary"
+                <input type="text" id="salary"
                        cam-variable-name="salary"
                        cam-variable-type="String"><br>
 
                 <label for="supervisor">Supervisor:</label><br>
-                <input readonly type="text" id="supervisor"
+                <input type="text" id="supervisor"
                        cam-variable-name="supervisor"
                        cam-variable-type="String"><br>
 
@@ -57,7 +57,7 @@
                        cam-variable-type="Boolean"/><br>
 
                 <label for="comments">Comment:</label><br>
-                <input type="text" id="comments"
+                <input readonly type="text" id="comments"
                        cam-variable-name="comments"
                        cam-variable-type="String"><br>
 
