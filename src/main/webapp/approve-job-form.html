@@ -1,4 +1,17 @@
 <form role="form" name="approveJobForm">
+    <script cam-script type="text/form-script">
+        camForm.on('form-loaded', function() {
+            camForm.variableManager.fetchVariable('experience');
+        });
+
+        camForm.on('variables-fetched', function() {
+            $scope.variable = camForm.variableManager.variable('experience');
+        });
+
+        camForm.on('submit', function() {
+            camForm.variableManager.variableValue('experience', $scope.variable);
+        });
+    </script>
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group">
@@ -22,23 +35,24 @@
 
                     </select>
                 </div>
-                <script cam-script type="text/form-script">
-                    var variableManager = camForm.variableManager;
-                    switch (variableManager.variable('experience')) {
-                        case "value_junior":
-                            document.querySelector('#' + 'value_junior').selected = true
-                            break;
-                        case "value_senior":
-                            document.querySelector('#' + 'value_senior').selected = true
-                            break;
-                        case "value_professional":
-                            document.querySelector('#' + 'value_professional').selected = true
-                            break;
-                        default:
-                            document.querySelector('#' + 'value_junior').selected = true
-                            break;
-                    }
-                </script>
+<!--                <script cam-script type="text/form-script">-->
+<!--                    var A_Group = execution.getVariableTyped("experience", true).getValue()-->
+<!--                    var variableManager = camForm.variableManager;-->
+<!--                    switch (variableManager.variable('experience')) {-->
+<!--                        case "value_junior":-->
+<!--                            document.querySelector('#' + 'value_junior').selected = true-->
+<!--                            break;-->
+<!--                        case "value_senior":-->
+<!--                            document.querySelector('#' + 'value_senior').selected = true-->
+<!--                            break;-->
+<!--                        case "value_professional":-->
+<!--                            document.querySelector('#' + 'value_professional').selected = true-->
+<!--                            break;-->
+<!--                        default:-->
+<!--                            document.querySelector('#' + 'value_junior').selected = true-->
+<!--                            break;-->
+<!--                    }-->
+<!--                </script>-->
                 <br>
 
                 <label for="salary">Salary:</label><br>
