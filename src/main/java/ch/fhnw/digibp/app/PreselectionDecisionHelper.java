@@ -31,18 +31,18 @@ public class PreselectionDecisionHelper implements JavaDelegate {
     }
 
     private int getNeededGrade(String jobDescriptionId, DelegateExecution d) {
-
-
         Job job1 = Objects.requireNonNull(jobService.getJobs()).stream().filter(job -> job.getJobId().equals(jobDescriptionId)).filter(job -> job.getGrade() != null).findFirst().get();
 
         setProcessVariableOnTheFly(d, job1);
         String neededGrade = job1.getGrade();
 
-        neededGrade = neededGrade.substring(neededGrade.length() - 1);
+        if (Character.isDigit(neededGrade.charAt(neededGrade.length() - 2))) {
+            neededGrade = neededGrade.substring(neededGrade.length() - 2);
+        } else {
+            neededGrade = neededGrade.substring(neededGrade.length() - 1);
+        }
         return Integer.parseInt(neededGrade);
     }
-
-
 
     private void setProcessVariableOnTheFly(DelegateExecution d, Job job1) {
         d.setVariable("Tasks", job1.getTasks());
