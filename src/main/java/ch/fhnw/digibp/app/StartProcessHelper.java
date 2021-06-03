@@ -67,8 +67,8 @@ public class StartProcessHelper implements JavaDelegate {
                 "       \"type\": \"String\"" +
                 "   }," +
                 "    \"working_years\" : {" +
-                "       \"value\" : \"" + candidate.getWorkingYears() + "\"," +
-                "       \"type\": \"String\"" +
+                "       \"value\" : \"" + Integer.parseInt(candidate.getWorkingYears()) + "\"," +
+                "       \"type\": \"Integer\"" +
                 "   }}}";
     }
 }
