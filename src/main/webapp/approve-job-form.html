@@ -1,17 +1,17 @@
 <form role="form" name="approveJobForm">
-<!--    <script cam-script type="text/form-script">-->
-<!--        camForm.on('form-loaded', function() {-->
-<!--            camForm.variableManager.fetchVariable('experience');-->
-<!--        });-->
+    <!--    <script cam-script type="text/form-script">-->
+    <!--        camForm.on('form-loaded', function() {-->
+    <!--            camForm.variableManager.fetchVariable('experience');-->
+    <!--        });-->
 
-<!--        camForm.on('variables-fetched', function() {-->
-<!--            $scope.variable = camForm.variableManager.variable('experience');-->
-<!--        });-->
+    <!--        camForm.on('variables-fetched', function() {-->
+    <!--            $scope.variable = camForm.variableManager.variable('experience');-->
+    <!--        });-->
 
-<!--        camForm.on('submit', function() {-->
-<!--            camForm.variableManager.variableValue('experience', $scope.variable);-->
-<!--        });-->
-<!--    </script>-->
+    <!--        camForm.on('submit', function() {-->
+    <!--            camForm.variableManager.variableValue('experience', $scope.variable);-->
+    <!--        });-->
+    <!--    </script>-->
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group">
@@ -19,12 +19,43 @@
                 <input readonly type="text" id="jobtitle"
                        cam-variable-name="jobtitle"
                        cam-variable-type="String"><br>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <label for="tasks">Tasks:</label><br>
+                    <input readonly type="text" id="tasks"
+                           cam-variable-name="tasks"
+                           cam-variable-type="String"><br>
+                </div>
 
-                <label for="tasks">Tasks:</label><br>
-                <input readonly type="text" id="tasks"
-                       cam-variable-name="tasks"
-                       cam-variable-type="String"><br>
-
+                <div class="col-xs-3">
+                    <label for="tasks">Tasks DE:</label><br>
+                    <input readonly type="text" id="tasks_de"
+                           cam-variable-name="tasks_de"
+                           cam-variable-type="String">
+                </div>
+                <div class="col-xs-3">
+                    <label for="tasks">Tasks IT:</label><br>
+                    <input readonly type="text" id="tasks_it"
+                           cam-variable-name="tasks_it"
+                           cam-variable-type="String">
+                </div>
+                <div class="col-xs-3">
+                    <label for="tasks">Tasks FR:</label><br>
+                    <input readonly type="text" id="tasks_fr"
+                           cam-variable-name="tasks_fr"
+                           cam-variable-type="String"><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
                 <label for="experience">Experience:</label><br>
                 <div class="controls">
                     <select readonly cam-variable-name="experience"
@@ -35,46 +66,70 @@
 
                     </select>
                 </div>
-<!--                <script cam-script type="text/form-script">-->
-<!--                    var A_Group = execution.getVariableTyped("experience", true).getValue()-->
-<!--                    var variableManager = camForm.variableManager;-->
-<!--                    switch (variableManager.variable('experience')) {-->
-<!--                        case "value_junior":-->
-<!--                            document.querySelector('#' + 'value_junior').selected = true-->
-<!--                            break;-->
-<!--                        case "value_senior":-->
-<!--                            document.querySelector('#' + 'value_senior').selected = true-->
-<!--                            break;-->
-<!--                        case "value_professional":-->
-<!--                            document.querySelector('#' + 'value_professional').selected = true-->
-<!--                            break;-->
-<!--                        default:-->
-<!--                            document.querySelector('#' + 'value_junior').selected = true-->
-<!--                            break;-->
-<!--                    }-->
-<!--                </script>-->
-                <br>
-
+                <!--                <script cam-script type="text/form-script">-->
+                <!--                    var A_Group = execution.getVariableTyped("experience", true).getValue()-->
+                <!--                    var variableManager = camForm.variableManager;-->
+                <!--                    switch (variableManager.variable('experience')) {-->
+                <!--                        case "value_junior":-->
+                <!--                            document.querySelector('#' + 'value_junior').selected = true-->
+                <!--                            break;-->
+                <!--                        case "value_senior":-->
+                <!--                            document.querySelector('#' + 'value_senior').selected = true-->
+                <!--                            break;-->
+                <!--                        case "value_professional":-->
+                <!--                            document.querySelector('#' + 'value_professional').selected = true-->
+                <!--                            break;-->
+                <!--                        default:-->
+                <!--                            document.querySelector('#' + 'value_junior').selected = true-->
+                <!--                            break;-->
+                <!--                    }-->
+                <!--                </script>-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
                 <label for="salary">Salary:</label><br>
                 <input readonly type="text" id="salary"
                        cam-variable-name="salary"
                        cam-variable-type="String"><br>
-
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
                 <label for="supervisor">Supervisor:</label><br>
                 <input readonly type="text" id="supervisor"
                        cam-variable-name="supervisor"
                        cam-variable-type="String"><br>
-
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
                 <label for="approvement">Approve Request?</label><br>
                 <input type="checkbox"
                        cam-variable-name="approvement"
                        cam-variable-type="Boolean"/><br>
-
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
                 <label for="comments">Comment:</label><br>
                 <input type="text" id="comments"
                        cam-variable-name="comments"
                        cam-variable-type="String"><br>
-
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
                 <label for="skillgrading">Grade:</label><br>
                 <div class="controls">
                     <select cam-variable-name="skillgrading"
