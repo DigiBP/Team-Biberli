@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
   <bpmn:collaboration id="Collaboration_1w9gfpp">
     <bpmn:participant id="Participant_1" name="XYZ Inc." processRef="recruting-process" />
     <bpmn:participant id="Participant_1ol61bo" name="Candidate" processRef="Process_1gezfp8" />
@@ -9,7 +9,7 @@
     <bpmn:messageFlow id="Flow_1mqgnu9" name="Rejection" sourceRef="Activity_059rlz6" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_02jvf52" name="Invitation with date proposal" sourceRef="Activity_1ycp8x6" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_0wgzmzi" name="Rejection" sourceRef="Activity_0wb0ohm" targetRef="Participant_1ol61bo" />
-    <bpmn:messageFlow id="Flow_1v3nicn" name="Accept/Reject/&#10;ask for another date" sourceRef="Participant_1ol61bo" targetRef="Activity_0jncxa3" />
+    <bpmn:messageFlow id="Flow_1v3nicn" name="Accept/Reject/&#10;Ask for another date" sourceRef="Participant_1ol61bo" targetRef="Activity_0jncxa3" />
     <bpmn:messageFlow id="Flow_0pmmrs0" name="Signature" sourceRef="Participant_1ol61bo" targetRef="Activity_0ylv1k4" />
   </bpmn:collaboration>
   <bpmn:process id="recruting-process" name="04_recruting-process" isExecutable="true" camunda:versionTag="2.0">
@@ -166,7 +166,7 @@
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="decision4" label="Accept candidate?" type="boolean" />
-          <camunda:formField id="rejectionReason" label="comment" type="string" />
+          <camunda:formField id="rejectionReason" label="Comment" type="string" />
           <camunda:formField id="Surname" label="Surname" type="string">
             <camunda:validation>
               <camunda:constraint name="readonly" />
@@ -487,7 +487,7 @@
               <camunda:constraint name="readonly" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="rejectionReason" label="If rejected indicate reason" type="string" />
+          <camunda:formField id="rejectionReason" label="Comment" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0lgf89k</bpmn:incoming>
@@ -803,7 +803,7 @@
         <di:waypoint x="2060" y="386" />
         <di:waypoint x="2060" y="820" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2006" y="793" width="67" height="14" />
+          <dc:Bounds x="1986" y="793" width="67" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0no9lyx_di" bpmnElement="Flow_0no9lyx">
