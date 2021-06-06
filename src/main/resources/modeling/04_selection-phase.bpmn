@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0dpg51j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:collaboration id="Collaboration_1w9gfpp">
     <bpmn:participant id="Participant_1" name="XYZ Inc." processRef="recruting-process" />
     <bpmn:participant id="Participant_1ol61bo" name="Candidate" processRef="Process_1gezfp8" />
@@ -30,7 +30,6 @@
         <bpmn:flowNodeRef>g1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_059rlz6</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1ow283q</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1ycp8x6</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>g2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0jncxa3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0uesrej</bpmn:flowNodeRef>
@@ -42,6 +41,7 @@
         <bpmn:flowNodeRef>Event_07f56sc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0wb0ohm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1ve1fa6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1ycp8x6</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1mn9mf9" name="HR Business Partner">
         <bpmn:flowNodeRef>Activity_0ylv1k4</bpmn:flowNodeRef>
@@ -187,33 +187,6 @@
       <bpmn:incoming>g3_pending</bpmn:incoming>
       <bpmn:outgoing>Flow_1agu8mb</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_1ycp8x6" name="Inform&#10;candidate&#10;about acceptance for interview">
-      <bpmn:extensionElements>
-        <camunda:connector>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="headers">
-              <camunda:map>
-                <camunda:entry key="Content-Type">application/json</camunda:entry>
-              </camunda:map>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="payload">out = JSON.stringify([{ 
-"jobId": JobDescriptionId,
-"jobtitle" : JobTitle,
-"surname" : surname,
-"name" : name,
-"date_invitation" : DateInvitation,
-"time_invitation" : TimeInvitation,
-"mail" : Mail
-}]);</camunda:inputParameter>
-            <camunda:inputParameter name="url">https://hook.integromat.com/3jyprp7l05lgk4wvo7pjanaq8chmybq2</camunda:inputParameter>
-            <camunda:inputParameter name="method">POST</camunda:inputParameter>
-          </camunda:inputOutput>
-          <camunda:connectorId>http-connector</camunda:connectorId>
-        </camunda:connector>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_08hlvoq</bpmn:incoming>
-      <bpmn:outgoing>Flow_15kme7b</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="g2" name="Candidate accepted?">
       <bpmn:incoming>Flow_0x5zqhx</bpmn:incoming>
       <bpmn:outgoing>g2_yes</bpmn:outgoing>
@@ -380,7 +353,7 @@
       <bpmn:incoming>Flow_1py9ajn</bpmn:incoming>
       <bpmn:outgoing>Flow_0lgf89k</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:endEvent id="Event_07f56sc" name="Candidate withdrew">
+    <bpmn:endEvent id="Event_07f56sc" name="Candidate withdrawn">
       <bpmn:incoming>g2_no</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:serviceTask id="Activity_0wb0ohm" name="Reject candidate">
@@ -493,6 +466,33 @@
       <bpmn:incoming>Flow_0lgf89k</bpmn:incoming>
       <bpmn:outgoing>Flow_08t8z73</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_1ycp8x6" name="Inform&#10;candidate&#10;about acceptance for interview">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">out = JSON.stringify([{ 
+"jobId": JobDescriptionId,
+"jobtitle" : JobTitle,
+"surname" : surname,
+"name" : name,
+"date_invitation" : DateInvitation,
+"time_invitation" : TimeInvitation,
+"mail" : Mail
+}]);</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/3jyprp7l05lgk4wvo7pjanaq8chmybq2</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_08hlvoq</bpmn:incoming>
+      <bpmn:outgoing>Flow_15kme7b</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:process id="Process_1gezfp8" isExecutable="false" />
   <bpmn:message id="Message_0xe7ef0" name="Message_3vv5320" />
@@ -715,9 +715,6 @@
       <bpmndi:BPMNShape id="Activity_01esu3a_di" bpmnElement="Activity_1blfsam">
         <dc:Bounds x="1590" y="164" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0s5208p_di" bpmnElement="Activity_1ycp8x6">
-        <dc:Bounds x="840" y="300" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1p3cuv8_di" bpmnElement="g2" isMarkerVisible="true">
         <dc:Bounds x="1115" y="315" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -795,6 +792,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_06hj74e_di" bpmnElement="Activity_1g1rjpr">
         <dc:Bounds x="1340" y="164" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s5208p_di" bpmnElement="Activity_1ycp8x6">
+        <dc:Bounds x="840" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1ol61bo_di" bpmnElement="Participant_1ol61bo" isHorizontal="true">
         <dc:Bounds x="155" y="820" width="2375" height="60" />
