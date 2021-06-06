@@ -7,22 +7,20 @@
     <bpmn:messageFlow id="Flow_0no9lyx" name="Contract draft" sourceRef="Activity_01whmsd" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_05a6hpg" name="Accept or request changes" sourceRef="Participant_1ol61bo" targetRef="Activity_1y9jus5" />
     <bpmn:messageFlow id="Flow_1mqgnu9" name="Rejection" sourceRef="Activity_059rlz6" targetRef="Participant_1ol61bo" />
-    <bpmn:messageFlow id="Flow_02jvf52" name="Invitation" sourceRef="Activity_1ycp8x6" targetRef="Participant_1ol61bo" />
-    <bpmn:messageFlow id="Flow_0ue3g5o" name="Date proposal" sourceRef="Activity_0uesrej" targetRef="Participant_1ol61bo" />
-    <bpmn:messageFlow id="Flow_1j3djqv" name="Date" sourceRef="Participant_1ol61bo" targetRef="Activity_0uesrej" />
+    <bpmn:messageFlow id="Flow_02jvf52" name="Invitation with date proposal" sourceRef="Activity_1ycp8x6" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_0wgzmzi" name="Rejection" sourceRef="Activity_0wb0ohm" targetRef="Participant_1ol61bo" />
-    <bpmn:messageFlow id="Flow_1v3nicn" name="Accept/Reject" sourceRef="Participant_1ol61bo" targetRef="Activity_0jncxa3" />
+    <bpmn:messageFlow id="Flow_1v3nicn" name="Accept/Reject/&#10;ask for another date" sourceRef="Participant_1ol61bo" targetRef="Activity_0jncxa3" />
     <bpmn:messageFlow id="Flow_0pmmrs0" name="Signature" sourceRef="Participant_1ol61bo" targetRef="Activity_0ylv1k4" />
   </bpmn:collaboration>
   <bpmn:process id="recruting-process" name="04_recruting-process" isExecutable="true" camunda:versionTag="2.0">
     <bpmn:laneSet id="LaneSet_0i9bvyr">
       <bpmn:lane id="Lane_0efgehs" name="Teamleader">
-        <bpmn:flowNodeRef>Activity_1g1rjpr</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>g3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1blfsam</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0os5z6l</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0jhksn2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1updqlq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1g1rjpr</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0qfd7ic" name="Recruiter">
         <bpmn:flowNodeRef>Event_1qv14jj</bpmn:flowNodeRef>
@@ -158,14 +156,17 @@
       <bpmn:incoming>Flow_1phyfa5</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_08hlvoq" sourceRef="Activity_1updqlq" targetRef="Activity_1ycp8x6" />
-    <bpmn:userTask id="Activity_1g1rjpr" name="Make final decision" camunda:candidateGroups="Teamleader">
+    <bpmn:exclusiveGateway id="g3">
+      <bpmn:incoming>Flow_08t8z73</bpmn:incoming>
+      <bpmn:outgoing>g3_rejected</bpmn:outgoing>
+      <bpmn:outgoing>g3_pending</bpmn:outgoing>
+      <bpmn:outgoing>g3_accepted</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_1blfsam" name="Pending candidate" camunda:candidateGroups="Teamleader">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="decision3" label="Status of candidate" type="enum">
-            <camunda:value id="Accepted" name="Accepted" />
-            <camunda:value id="Pending" name="Pending" />
-            <camunda:value id="Rejected" name="Rejected" />
-          </camunda:formField>
+          <camunda:formField id="decision4" label="Accept candidate?" type="boolean" />
+          <camunda:formField id="rejectionReason" label="comment" type="string" />
           <camunda:formField id="Surname" label="Surname" type="string">
             <camunda:validation>
               <camunda:constraint name="readonly" />
@@ -181,23 +182,6 @@
               <camunda:constraint name="readonly" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="rejectionReason" label="If rejected indicate reason" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0lgf89k</bpmn:incoming>
-      <bpmn:outgoing>Flow_08t8z73</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:exclusiveGateway id="g3">
-      <bpmn:incoming>Flow_08t8z73</bpmn:incoming>
-      <bpmn:outgoing>g3_rejected</bpmn:outgoing>
-      <bpmn:outgoing>g3_pending</bpmn:outgoing>
-      <bpmn:outgoing>g3_accepted</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_1blfsam" name="Pending candidate" camunda:candidateGroups="Teamleader">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="decision4" label="Accept candidate?" type="boolean" />
-          <camunda:formField id="rejectionReason" label="If rejected indicate reason" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>g3_pending</bpmn:incoming>
@@ -259,7 +243,7 @@
       <bpmn:incoming>Flow_15kme7b</bpmn:incoming>
       <bpmn:outgoing>Flow_0x5zqhx</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:manualTask id="Activity_0uesrej" name="Find date">
+    <bpmn:manualTask id="Activity_0uesrej" name="Confirm interview date">
       <bpmn:incoming>g2_yes</bpmn:incoming>
       <bpmn:outgoing>Flow_1py9ajn</bpmn:outgoing>
     </bpmn:manualTask>
@@ -396,7 +380,7 @@
       <bpmn:incoming>Flow_1py9ajn</bpmn:incoming>
       <bpmn:outgoing>Flow_0lgf89k</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:endEvent id="Event_07f56sc" name="Candidate withdrawed">
+    <bpmn:endEvent id="Event_07f56sc" name="Candidate withdrew">
       <bpmn:incoming>g2_no</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:serviceTask id="Activity_0wb0ohm" name="Reject candidate">
@@ -479,6 +463,35 @@
       </bpmn:extensionElements>
       <bpmn:incoming>g1_yes</bpmn:incoming>
       <bpmn:outgoing>Flow_08hlvoq</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1g1rjpr" name="Make final decision" camunda:candidateGroups="Teamleader">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="decision3" label="Status of candidate" type="enum">
+            <camunda:value id="Accepted" name="Accepted" />
+            <camunda:value id="Pending" name="Pending" />
+            <camunda:value id="Rejected" name="Rejected" />
+          </camunda:formField>
+          <camunda:formField id="Surname" label="Surname" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="Name" label="Name" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="JobTitle" label="JobTitle" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="rejectionReason" label="If rejected indicate reason" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0lgf89k</bpmn:incoming>
+      <bpmn:outgoing>Flow_08t8z73</bpmn:outgoing>
     </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="Process_1gezfp8" isExecutable="false" />
@@ -693,9 +706,6 @@
           <dc:Bounds x="765" y="495" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_06hj74e_di" bpmnElement="Activity_1g1rjpr">
-        <dc:Bounds x="1340" y="164" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1a7k9q3_di" bpmnElement="g3" isMarkerVisible="true">
         <dc:Bounds x="1475" y="179" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -747,7 +757,7 @@
       <bpmndi:BPMNShape id="Event_02l88dc_di" bpmnElement="Event_07f56sc">
         <dc:Bounds x="1122" y="452" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1113" y="495" width="55" height="27" />
+          <dc:Bounds x="1115" y="495" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0wb0ohm_di" bpmnElement="Activity_0wb0ohm">
@@ -782,6 +792,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0d8vliw_di" bpmnElement="Activity_1updqlq">
         <dc:Bounds x="650" y="164" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06hj74e_di" bpmnElement="Activity_1g1rjpr">
+        <dc:Bounds x="1340" y="164" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1ol61bo_di" bpmnElement="Participant_1ol61bo" isHorizontal="true">
         <dc:Bounds x="155" y="820" width="2375" height="60" />
@@ -818,21 +831,7 @@
         <di:waypoint x="890" y="380" />
         <di:waypoint x="890" y="820" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="837" y="785" width="45" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ue3g5o_di" bpmnElement="Flow_0ue3g5o">
-        <di:waypoint x="1220" y="380" />
-        <di:waypoint x="1220" y="820" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1145" y="785" width="70" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1j3djqv_di" bpmnElement="Flow_1j3djqv">
-        <di:waypoint x="1280" y="820" />
-        <di:waypoint x="1280" y="380" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1298" y="785" width="24" height="14" />
+          <dc:Bounds x="816" y="786" width="68" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0wgzmzi_di" bpmnElement="Flow_0wgzmzi">
@@ -846,7 +845,7 @@
         <di:waypoint x="1030" y="820" />
         <di:waypoint x="1030" y="380" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1036" y="785" width="68" height="14" />
+          <dc:Bounds x="1043" y="780" width="75" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pmmrs0_di" bpmnElement="Flow_0pmmrs0">
