@@ -9,7 +9,7 @@
     <bpmn:messageFlow id="Flow_1mqgnu9" name="Rejection" sourceRef="Activity_059rlz6" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_02jvf52" name="Invitation with date proposal" sourceRef="Activity_1ycp8x6" targetRef="Participant_1ol61bo" />
     <bpmn:messageFlow id="Flow_0wgzmzi" name="Rejection" sourceRef="Activity_0wb0ohm" targetRef="Participant_1ol61bo" />
-    <bpmn:messageFlow id="Flow_1v3nicn" name="Accept/Reject/&#10;Ask for another date" sourceRef="Participant_1ol61bo" targetRef="Activity_0jncxa3" />
+    <bpmn:messageFlow id="Flow_1v3nicn" name="Accept/Reject/&#10;Ask for another interview date" sourceRef="Participant_1ol61bo" targetRef="Activity_0jncxa3" />
     <bpmn:messageFlow id="Flow_0pmmrs0" name="Signature" sourceRef="Participant_1ol61bo" targetRef="Activity_0ylv1k4" />
   </bpmn:collaboration>
   <bpmn:process id="recruting-process" name="04_recruting-process" isExecutable="true" camunda:versionTag="2.0">
