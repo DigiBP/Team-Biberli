@@ -52,11 +52,11 @@
       <bpmn:outgoing>Flow_1o0keaj</bpmn:outgoing>
       <bpmn:outgoing>Flow_1vocks0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_1hk1tgx" name="Create Id" camunda:class="ch.fhnw.digibp.app.IdentificationGenerator">
+    <bpmn:serviceTask id="Activity_1hk1tgx" name="Create ID" camunda:class="ch.fhnw.digibp.app.IdentificationGenerator">
       <bpmn:incoming>Flow_1vocks0</bpmn:incoming>
       <bpmn:outgoing>Flow_0d580g8</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1obtlnm" name="Publish job offer">
+    <bpmn:serviceTask id="Activity_1obtlnm" name="Publish job position">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -153,6 +153,10 @@
       <bpmndi:BPMNShape id="Lane_0efgehs_di" bpmnElement="Lane_0efgehs" isHorizontal="true">
         <dc:Bounds x="220" y="100" width="930" height="140" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1qjnw5b_di" bpmnElement="Flow_1qjnw5b">
+        <di:waypoint x="440" y="333" />
+        <di:waypoint x="480" y="333" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0d580g8_di" bpmnElement="Flow_0d580g8">
         <di:waypoint x="860" y="333" />
         <di:waypoint x="890" y="333" />
@@ -191,10 +195,6 @@
       <bpmndi:BPMNEdge id="Flow_0vyg4vf_di" bpmnElement="Flow_0vyg4vf">
         <di:waypoint x="308" y="172" />
         <di:waypoint x="340" y="172" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1qjnw5b_di" bpmnElement="Flow_1qjnw5b">
-        <di:waypoint x="440" y="333" />
-        <di:waypoint x="480" y="333" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_1v4nudu_di" bpmnElement="describe_job_request">
         <dc:Bounds x="340" y="132" width="100" height="80" />
