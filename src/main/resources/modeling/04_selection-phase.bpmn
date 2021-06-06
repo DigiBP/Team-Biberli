@@ -342,7 +342,7 @@
     <bpmn:userTask id="Activity_1emcopu" name="Conduct interview" camunda:candidateGroups="Recruiter">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="startdate" label="Startdate" type="date" />
+          <camunda:formField id="startdate" label="Startdate" type="string" />
           <camunda:formField id="pensum" label="Pensum" type="long" />
           <camunda:formField id="salaryfinal" label="Final salary" type="string" />
           <camunda:formField id="avarage_grading" label="Average Grading" type="string">
