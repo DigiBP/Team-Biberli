@@ -476,10 +476,10 @@
               </camunda:map>
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">out = JSON.stringify([{ 
-"jobId": JobDescriptionId,
+"jobId" : JobDescriptionId,
 "jobtitle" : JobTitle,
-"surname" : surname,
-"name" : name,
+"surname" : Surname,
+"name" : Name,
 "date_invitation" : DateInvitation,
 "time_invitation" : TimeInvitation,
 "mail" : Mail
