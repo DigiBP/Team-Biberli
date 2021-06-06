@@ -13,7 +13,7 @@
         <bpmn:flowNodeRef>Event_0uuxa7q</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:serviceTask id="Activity_0vcb9ea" name="get job applications" camunda:class="ch.fhnw.digibp.app.JobEnumHelper">
+    <bpmn:serviceTask id="Activity_0vcb9ea" name="Get job offer" camunda:class="ch.fhnw.digibp.app.JobEnumHelper">
       <bpmn:incoming>Flow_0x4ogpc</bpmn:incoming>
       <bpmn:outgoing>Flow_056lg1d</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -24,7 +24,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0x4ogpc</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1jbb2ju" name="select job applications" camunda:formKey="embedded:app:select-job-form.html" camunda:candidateGroups="Recruiter">
+    <bpmn:userTask id="Activity_1jbb2ju" name="Select job offer" camunda:formKey="embedded:app:select-job-form.html" camunda:candidateGroups="Recruiter">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="jobOfferIds" label="tbd Select available ids" type="enum" />
@@ -35,7 +35,7 @@
       <bpmn:incoming>Flow_056lg1d</bpmn:incoming>
       <bpmn:outgoing>Flow_0vamvgv</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_0jv4nr1" name="start review process of job application" camunda:class="ch.fhnw.digibp.app.StartProcessHelper">
+    <bpmn:serviceTask id="Activity_0jv4nr1" name="Start candidate selection process" camunda:class="ch.fhnw.digibp.app.StartProcessHelper">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="selectedJob">${selectedJob}</camunda:inputParameter>
