@@ -155,7 +155,6 @@
     <bpmn:endEvent id="Event_1ow283q" name="Candidate rejected">
       <bpmn:incoming>Flow_1phyfa5</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_08hlvoq" sourceRef="Activity_1updqlq" targetRef="Activity_1ycp8x6" />
     <bpmn:exclusiveGateway id="g3">
       <bpmn:incoming>Flow_08t8z73</bpmn:incoming>
       <bpmn:outgoing>g3_rejected</bpmn:outgoing>
@@ -435,7 +434,7 @@
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>g1_yes</bpmn:incoming>
-      <bpmn:outgoing>Flow_08hlvoq</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0msf829</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_1g1rjpr" name="Make final decision" camunda:candidateGroups="Teamleader">
       <bpmn:extensionElements>
@@ -490,9 +489,10 @@
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_08hlvoq</bpmn:incoming>
+      <bpmn:incoming>Flow_0msf829</bpmn:incoming>
       <bpmn:outgoing>Flow_15kme7b</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0msf829" sourceRef="Activity_1updqlq" targetRef="Activity_1ycp8x6" />
   </bpmn:process>
   <bpmn:process id="Process_1gezfp8" isExecutable="false" />
   <bpmn:message id="Message_0xe7ef0" name="Message_3vv5320" />
@@ -510,11 +510,6 @@
       <bpmndi:BPMNShape id="Lane_0efgehs_di" bpmnElement="Lane_0efgehs" isHorizontal="true">
         <dc:Bounds x="185" y="110" width="2345" height="160" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_08hlvoq_di" bpmnElement="Flow_08hlvoq">
-        <di:waypoint x="750" y="204" />
-        <di:waypoint x="890" y="204" />
-        <di:waypoint x="890" y="300" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1q7a1rs_di" bpmnElement="g1_yes">
         <di:waypoint x="700" y="315" />
         <di:waypoint x="700" y="244" />
@@ -675,6 +670,11 @@
       <bpmndi:BPMNEdge id="Flow_0tmr6b8_di" bpmnElement="Flow_0tmr6b8">
         <di:waypoint x="650" y="340" />
         <di:waypoint x="675" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0msf829_di" bpmnElement="Flow_0msf829">
+        <di:waypoint x="750" y="204" />
+        <di:waypoint x="890" y="204" />
+        <di:waypoint x="890" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1qv14jj_di" bpmnElement="Event_1qv14jj">
         <dc:Bounds x="242" y="322" width="36" height="36" />
