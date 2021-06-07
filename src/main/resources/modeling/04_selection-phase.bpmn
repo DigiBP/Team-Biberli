@@ -125,7 +125,7 @@
     <bpmn:sequenceFlow id="g1_yes" name="Yes" sourceRef="g1" targetRef="Activity_1updqlq">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision=="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="Activity_1updqlq" name="Propose interview date and time" camunda:candidateGroups="Teamleader">
+    <bpmn:userTask id="Activity_1updqlq" name="Review application" camunda:candidateGroups="Teamleader">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="JobTitle" label="Job title" type="string">
@@ -145,7 +145,7 @@
           </camunda:formField>
           <camunda:formField id="DateInvitation" label="Proposed date for interview?" type="string" />
           <camunda:formField id="TimeInvitation" label="Timeslot?" type="string" />
-          <camunda:formField id="decision1_1" label="Invite for interview or reject?" type="boolean" />
+          <camunda:formField id="decision1_1" label="Reject candidate?" type="boolean" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>g1_yes</bpmn:incoming>
@@ -187,7 +187,7 @@
       <bpmn:incoming>Flow_0llo18e</bpmn:incoming>
       <bpmn:outgoing>Flow_1phyfa5</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="g1_1" name="invite candidate for an interview?">
+    <bpmn:exclusiveGateway id="g1_1" name="Invite candidate for an interview?">
       <bpmn:incoming>Flow_0nw65hi</bpmn:incoming>
       <bpmn:outgoing>Flow_0llo18e</bpmn:outgoing>
       <bpmn:outgoing>g1_1_yes</bpmn:outgoing>

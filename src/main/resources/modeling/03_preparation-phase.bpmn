@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bsqfz9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0bsqfz9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:collaboration id="Collaboration_1yuujpz">
     <bpmn:participant id="Participant_1vgktf9" name="XYZ Inc." processRef="preparation-phase" />
   </bpmn:collaboration>
@@ -21,7 +21,7 @@
     <bpmn:sequenceFlow id="Flow_0x4ogpc" sourceRef="StartEvent_1" targetRef="Activity_0vcb9ea" />
     <bpmn:sequenceFlow id="Flow_0nvowyt" sourceRef="Activity_0jv4nr1" targetRef="Event_0uuxa7q" />
     <bpmn:sequenceFlow id="Flow_0vamvgv" sourceRef="Activity_1jbb2ju" targetRef="Activity_0jv4nr1" />
-    <bpmn:startEvent id="StartEvent_1">
+    <bpmn:startEvent id="StartEvent_1" name="Start preparation-phase">
       <bpmn:outgoing>Flow_0x4ogpc</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Activity_1jbb2ju" name="Select job offer" camunda:formKey="embedded:app:select-job-form.html" camunda:candidateGroups="Recruiter">
@@ -44,7 +44,7 @@
       <bpmn:incoming>Flow_0vamvgv</bpmn:incoming>
       <bpmn:outgoing>Flow_0nvowyt</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:endEvent id="Event_0uuxa7q">
+    <bpmn:endEvent id="Event_0uuxa7q" name="Preparation-phase finished">
       <bpmn:incoming>Flow_0nvowyt</bpmn:incoming>
     </bpmn:endEvent>
   </bpmn:process>
@@ -77,6 +77,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="252" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="226" y="142" width="90" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0jd98xv_di" bpmnElement="Activity_1jbb2ju">
         <dc:Bounds x="500" y="77" width="100" height="80" />
@@ -86,6 +89,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0uuxa7q_di" bpmnElement="Event_0uuxa7q">
         <dc:Bounds x="782" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="765" y="142" width="71" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
