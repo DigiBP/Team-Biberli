@@ -153,10 +153,10 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_0nw65hi" sourceRef="Activity_1updqlq" targetRef="g1_1" />
     <bpmn:sequenceFlow id="Flow_0llo18e" name="No" sourceRef="g1_1" targetRef="Activity_059rlz6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision1_1=="false"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision1_1=="true"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="g1_1_yes" name="Yes" sourceRef="g1_1" targetRef="Activity_1ycp8x6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision1_1=="true"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision1_1=="false"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:serviceTask id="Activity_059rlz6" name="Reject candidate">
       <bpmn:extensionElements>
